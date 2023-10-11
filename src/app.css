@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root
+{
+    --bgcolor:#1C1C1C;
+    --principal : #E6E6E6;
+    --secondary:#1374EF;
+    --border:#2E2E2E;
+    background-color: var(--bgcolor);
+}
+
+.btn{
+    background-color: var(--secondary);
+    padding: 2px;
+    border-radius: 1px;
+    color: var(--principal);
+  }
