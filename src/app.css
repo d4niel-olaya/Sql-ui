@@ -9,11 +9,12 @@
     --secondary:#1374EF;
     --border:#2E2E2E;
     background-color: var(--bgcolor);
+    color:var(--principal);
 }
 
 .btn{
     background-color: var(--secondary);
-    padding: 2px;
-    border-radius: 1px;
+    padding: 0.40rem;
+    border-radius: 2px;
     color: var(--principal);
   }

@@ -1,11 +1,15 @@
 <script lang="ts">
+    import Logo from "../components/Logo.svelte";
     import AddTable from "../components/AddTable.svelte";
+    import Generate from "../components/Generate.svelte";
 </script>
+    <Logo/>
+  <div class="flex justify-end mr-5">
 
-<h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  <AddTable/>
+    <AddTable/>
+    <Generate/>
+
+  </div>
   
   <style lang="postcss">
     :global(html) {

@@ -1,0 +1,9 @@
+interface IColumn
+{
+    
+}
+
+interface ITable
+{
+
+}

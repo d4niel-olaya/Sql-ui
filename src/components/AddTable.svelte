@@ -1,7 +1,7 @@
 
 
-<div class="flex justify-end mr-1">
-    <div>
+
+    <div class="m-1">
         <button class="btn font-mono">
             <div class="flex items-center">
                 <div class="mr-px">
@@ -12,5 +12,5 @@
         </button>
         
     </div>
-</div>
+
 
