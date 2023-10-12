@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/*
 :root
 {
     --bgcolor:#1C1C1C;
@@ -45,4 +45,4 @@
     height: 100%;
     top: 0px;
     left: 0px;
-  }
+  }*/
