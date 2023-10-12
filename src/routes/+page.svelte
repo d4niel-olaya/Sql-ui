@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <button class="btn btn-primary">Primary</button>
+  
       <TableBoard/>
 
     
