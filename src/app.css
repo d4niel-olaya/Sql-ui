@@ -37,3 +37,12 @@
     border: 1px solid #D1D1D1;
     border-radius: 10px;
   }
+
+  .infinty
+  {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+  }
