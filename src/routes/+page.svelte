@@ -7,19 +7,18 @@
     import TableBoard from "../components/TableBoard.svelte";
 </script>
     <Logo/>
-  <div class="flex justify-end mr-10">
+  <div class="flex justify-around mr-10 mt-5">
+    <CodeResult/>
     <div class="flex flex-col items-center">
-
         <AddTable/>
         <Provider/>
         <Generate/>
     </div>
   </div>
-  <div class="flex flex-wrap justify-between">
+
     
       <TableBoard/>
-      <CodeResult/>
-  </div>
+  
   
   <style lang="postcss">
     :global(html) {
