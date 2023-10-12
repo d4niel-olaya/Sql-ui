@@ -1,6 +1,6 @@
 
 
-<div class="m-1 font-mono">
+<div class="m-1 font-mono mr-14">
     <label for="provider">Provider :</label>
     <br>
     <select id="provider" class="select">

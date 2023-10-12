@@ -3,6 +3,8 @@
     import AddTable from "../components/AddTable.svelte";
     import Generate from "../components/Generate.svelte";
     import Provider from "../components/Provider.svelte";
+    import CodeResult from "../components/CodeResult.svelte";
+    import TableBoard from "../components/TableBoard.svelte";
 </script>
     <Logo/>
   <div class="flex justify-end mr-10">
@@ -12,6 +14,11 @@
         <Provider/>
         <Generate/>
     </div>
+  </div>
+  <div class="flex flex-wrap justify-between">
+    
+      <TableBoard/>
+      <CodeResult/>
   </div>
   
   <style lang="postcss">
