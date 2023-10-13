@@ -6,6 +6,13 @@
 {
   height: calc(100vh - 100%);
 }
+._path_v5z62_8 {
+  fill: transparent;
+  stroke: #485a74;
+  pointer-events: none;
+  shape-rendering: geometricPrecision;
+  stroke-width: 1pt;
+}
 /*
 :root
 {
