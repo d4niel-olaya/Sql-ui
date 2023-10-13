@@ -1,13 +1,21 @@
-interface IColumn
+export interface IColumn
 {
     colunmName: string;
     datatype : string;
-    options : string;
+    options : IOptions
 }
 
-interface ITable
+export interface ITable
 {
     id : number;
     tableName: string;
     colums: IColumn []
 }
+
+export interface IOptions
+{
+    primaryKey? : boolean,
+    allowNull? : boolean
+    defaultValue? : boolean
+}           
+

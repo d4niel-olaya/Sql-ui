@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.h
+{
+  height: calc(100vh - 100%);
+}
 /*
 :root
 {
