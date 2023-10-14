@@ -8,6 +8,8 @@
         modal.showModal();
     }
 </script>
+
+
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="card w-96 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
 on:click={Open}
