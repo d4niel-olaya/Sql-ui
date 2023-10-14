@@ -21,14 +21,14 @@
     
 
         <dialog class="modal" bind:this={modal} >
-            <div class="modal-box">
-                <div class="form-control w-full">
+            <div class="modal-box w-11/12 max-w-5xl">
+                <div class="form-control">
                     <!-- svelte-ignore a11y-label-has-associated-control -->
                     <label class="label">
                         <span class="label-text">Table name</span>
                     </label>
                     <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" />
-                    <div class="flex flex-row w-full">
+                    <div class="flex flex-wrap flex-row justify-around w-full">
                         <!-- svelte-ignore a11y-label-has-associated-control -->
                         <div>
                             <label class="label">
@@ -39,24 +39,27 @@
                         <div>
                             <!-- svelte-ignore a11y-label-has-associated-control -->
                             <label class="label">
-                                <span class="label-text">column name</span>
+                                <span class="label-text">type</span>
                             </label>
                             <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
                         </div>
                         <div>
                             <!-- svelte-ignore a11y-label-has-associated-control -->
                             <label class="label">
-                                <span class="label-text">column name</span>
+                                <span class="label-text">default</span>
                             </label>
                             <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
                         </div>
                         <div>
                             <!-- svelte-ignore a11y-label-has-associated-control -->
                             <label class="label">
-                                <span class="label-text">column name</span>
+                                <span class="label-text">constraints</span>
                             </label>
                             <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
                         </div>
+                    </div>
+                    <div class="w-1/6 p-4">
+                        <button class="btn btn-primary">Add Column</button>
                     </div>
                 </div>
               <div class="modal-action">

@@ -10,7 +10,7 @@
    
 </script>
     <Logo/>
-  <div class="flex justify-around mr-10 mt-5">
+  <div class="flex flex-wrap justify-around mt-5 w-screen">
     <CodeResult/>
     <div class="flex flex-col items-center">
         <AddTable/>
