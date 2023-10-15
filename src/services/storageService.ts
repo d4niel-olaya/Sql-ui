@@ -1,16 +1,24 @@
-import type{ IColumn,ITable } from "../interfaces/base";
+import type{ IColumnUI,ITable } from "../interfaces/base";
 
 class storageService
 {
-    private tables : ITable[];
-
-    constructor()
-    {
-        this.tables = [];
-    }
 
     create(table: ITable):void{
-        this.tables.push(table);
-        localStorage.setItem("tables", JSON.stringify(this.tables));
+        let tables: ITable[] = this.get();
+        tables.push(table);
+        localStorage.setItem("tables", JSON.stringify(tables));
     }
+
+    get():ITable[]
+    {
+        let res = localStorage.getItem("tables") || null
+        if(res != null)
+        {
+            let tables : ITable[] = JSON.parse(res)
+            return tables
+        }
+        let table : ITable[] = [] 
+        return table
+    }
+
 }

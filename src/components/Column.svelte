@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { IColumnUI } from "../interfaces/columns";
+    import type { IColumnUI } from "../interfaces/base";
     export let columnData : IColumnUI 
    export let labels : boolean;
 </script>

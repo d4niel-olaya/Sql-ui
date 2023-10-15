@@ -1,6 +1,6 @@
 
 <script  lang="ts">
-    import type { IColumnUI } from "../interfaces/columns";
+    import type { IColumnUI } from "../interfaces/base";
     import Column from "./Column.svelte";
     let modal : HTMLDialogElement
     let columns : IColumnUI[] = []
@@ -86,6 +86,7 @@
                     </div>
                 </div>
               <div class="modal-action">
+                  <button class="btn btn-primary">Create</button>
                 <form method="dialog">
                   <button class="btn">Close</button>
                 </form>

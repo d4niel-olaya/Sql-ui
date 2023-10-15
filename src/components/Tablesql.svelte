@@ -1,7 +1,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script lang="ts">
-    import type { IColumnUI } from "../interfaces/columns";
+    import type { IColumnUI } from "../interfaces/base";
     export let model : IColumnUI
     let modal : HTMLDialogElement
     function Open()

@@ -1,21 +1,19 @@
-export interface IColumn
-{
-    colunmName: string;
-    datatype : string;
-    options : IOptions
-}
+
 
 export interface ITable
 {
     id : number;
     tableName: string;
-    colums: IColumn []
+    colums: IColumnUI []
 }
 
-export interface IOptions
+export interface IColumnUI
 {
-    primaryKey? : boolean,
-    allowNull? : boolean
-    defaultValue? : boolean
-}           
+    id: number
+    columnName : string;
+    type:string
+    default:string
+    constraint : string
+}
+         
 
