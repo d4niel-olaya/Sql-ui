@@ -1,8 +1,27 @@
 import type{ IColumnUI,ITable } from "../interfaces/base";
 
-class storageService
+export class storageService
 {
-
+    constructor()
+    {
+        let example : ITable[]= [
+            {
+                id:1,
+                tableName:"example",
+                colums:[
+                    {
+                        id:1,
+                        columnName:"example",
+                        type:"text",
+                        constraint:"not null",
+                        default:"null"
+                    }
+                ]
+            }
+        ]
+        localStorage.setItem("tables", JSON.stringify(example))
+    }
+    
     create(table: ITable):void{
         let tables: ITable[] = this.get();
         tables.push(table);

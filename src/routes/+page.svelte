@@ -7,6 +7,7 @@
     import TableBoard from "../components/TableBoard.svelte";
     import Tablesql from "../components/Tablesql.svelte";
     import arrowsql from "$lib/assets/arrowsql.svg";
+    
    
 </script>
     <Logo/>
