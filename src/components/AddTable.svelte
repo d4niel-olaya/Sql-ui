@@ -1,20 +1,30 @@
 
 <script  lang="ts">
-    import type { IColumnUI } from "../interfaces/base";
+    import type { IColumnUI, ITable } from "../interfaces/base";
+    import { storageService } from "../services/storageService";
     import Column from "./Column.svelte";
     let modal : HTMLDialogElement
+    let service = new storageService();
+    let tables : ITable[];
     let columns : IColumnUI[] = []
+    let newTable : ITable = {
+        id: 0,
+        tableName: "",
+        colums: []
+    }
+
     function Open()
     {
-        columns = [
-        {
-            id:1,
-            columnName:"",
-            type:"text",
-            constraint:"primary-key",
-            default:""
-        }
-    ]
+            columns = [
+            {
+                id:1,
+                columnName:"",
+                type:"text",
+                constraint:"primary-key",
+                default:""
+            }
+        ]
+        tables = service.get(); //getting tables from localstorage
         modal.showModal();
         
         
@@ -35,6 +45,15 @@
     function deleteColumn(columnDelete : IColumnUI)
     {
         columns = columns.filter(x => x.id != columnDelete.id);
+    }
+
+
+    function createTable()
+    {
+        newTable.id = tables.length > 0 ? (tables[tables.length - 1].id + 1) : 1;
+        newTable.colums = columns;
+        service.create(newTable);
+        modal.close();
     }
     
     
@@ -60,7 +79,7 @@
                     <label class="label">
                         <span class="label-text">Table name</span>
                     </label>
-                    <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" bind:value={newTable.tableName}/>
                     <div class="flex flex-wrap flex-row justify-around w-full">
                         <!-- svelte-ignore empty-block -->
                         {#if columns.length > 0}
@@ -87,7 +106,7 @@
                     </div>
                 </div>
               <div class="modal-action">
-                  <button class="btn btn-primary">Create</button>
+                  <button class="btn btn-primary" on:click={createTable}>Create</button>
                 <form method="dialog">
                   <button class="btn">Close</button>
                 </form>

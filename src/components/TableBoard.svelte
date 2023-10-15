@@ -3,14 +3,15 @@
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
     const service = new storageService()
+    $:service.get()
 </script>
 
 
 
 <div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen"> 
     {#if service.get().length > 0}
-    {#each service.get() as table}
-        <Tablesql model={table}/>
-    {/each}
-{/if}
+        {#each service.get() as table}
+            <Tablesql model={table}/>
+        {/each}
+    {/if}
 </div>
