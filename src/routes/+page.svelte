@@ -18,7 +18,7 @@
         <Generate/>
     </div>
   </div>
-      <Tablesql name={"example"} />
+     
       <TableBoard/>
 
     

@@ -1,7 +1,8 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script lang="ts">
-    export let name : string;
+    import type { IColumnUI } from "../interfaces/columns";
+    export let model : IColumnUI
     let modal : HTMLDialogElement
     function Open()
     {
@@ -15,7 +16,7 @@
 on:click={Open}
 >
     <div class="card-body">
-      <h2 class="card-title">{name}</h2>
+      <h2 class="card-title">{model.columnName}</h2>
     </div>
 </div>
 

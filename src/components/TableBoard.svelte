@@ -1,4 +1,3 @@
-<div class="w-full p-2 bg-slate-700 h"> 
-    <div class="w-full">
-    </div>
+<div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen"> 
+    
 </div>
