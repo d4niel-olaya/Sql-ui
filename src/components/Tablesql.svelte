@@ -7,6 +7,7 @@
     function Open()
     {
         modal.showModal();
+       
     }
 </script>
 

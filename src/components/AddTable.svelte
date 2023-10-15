@@ -17,6 +17,7 @@
     ]
         modal.showModal();
         
+        
     }
 
     function addColumn()
