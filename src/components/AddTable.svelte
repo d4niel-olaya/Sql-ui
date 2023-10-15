@@ -3,29 +3,40 @@
     import type { IColumnUI } from "../interfaces/columns";
     import Column from "./Column.svelte";
     let modal : HTMLDialogElement
-    let columns : IColumnUI[] =[
+    let columns : IColumnUI[] = []
+    function Open()
+    {
+        columns = [
         {
+            id:1,
             columnName:"",
             type:"",
             constraint:"",
             default:""
         }
     ]
-    
-    function Open()
-    {
         modal.showModal();
+        
     }
 
     function addColumn()
     {
+        let idLast : IColumnUI = columns[columns.length -1];
         columns = columns.concat({
+            id: (idLast.id + 1),
             columnName:"",
             type:"a",
             constraint : "",
             default : ""
         });
     }
+
+    function deleteColumn(columnDelete : IColumnUI)
+    {
+        columns = columns.filter(x => x.id != columnDelete.id);
+    }
+    
+    
 </script>
 
     <div class="m-1 mr-14">
@@ -51,9 +62,24 @@
                     <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" />
                     <div class="flex flex-wrap flex-row justify-around w-full">
                         <!-- svelte-ignore empty-block -->
-                        {#each columns as column}
-                            <Column columnData ={column}/>
-                        {/each}
+                        {#if columns.length > 0}
+                            {#each columns as column, i}
+                                {#if i == 0}
+                                    <Column columnData ={column} labels={true}/>
+                                    
+                                {:else}
+                                    <Column columnData ={column} labels={false}/>
+                                   
+                                {/if}
+                                {#if columns.length > 1}
+                                <div class="self-center">
+                                    <button class="btn btn-circle" on:click={x => deleteColumn(column)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                    </button>
+                                </div>
+                                {/if}
+                            {/each}
+                        {/if}
                     </div>
                     <div class="w-1/6 p-4">
                         <button class="btn btn-primary" on:click={addColumn}>Add Column</button>
