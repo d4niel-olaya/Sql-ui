@@ -2,7 +2,7 @@
     import type { ITable } from "../interfaces/base";
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
-    const service = new storageService();
+    const service = new storageService()
 </script>
 
 
@@ -12,5 +12,5 @@
     {#each service.get() as table}
         <Tablesql model={table}/>
     {/each}
-    {/if}
+{/if}
 </div>
