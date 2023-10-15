@@ -1,9 +1,30 @@
 
 <script  lang="ts">
+    import type { IColumnUI } from "../interfaces/columns";
+    import Column from "./Column.svelte";
     let modal : HTMLDialogElement
+    let columns : IColumnUI[] =[
+        {
+            columnName:"",
+            type:"",
+            constraint:"",
+            default:""
+        }
+    ]
+    
     function Open()
     {
         modal.showModal();
+    }
+
+    function addColumn()
+    {
+        columns = columns.concat({
+            columnName:"",
+            type:"a",
+            constraint : "",
+            default : ""
+        });
     }
 </script>
 
@@ -29,37 +50,13 @@
                     </label>
                     <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" />
                     <div class="flex flex-wrap flex-row justify-around w-full">
-                        <!-- svelte-ignore a11y-label-has-associated-control -->
-                        <div>
-                            <label class="label">
-                                <span class="label-text">column name</span>
-                            </label>
-                            <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
-                        </div>
-                        <div>
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
-                            <label class="label">
-                                <span class="label-text">type</span>
-                            </label>
-                            <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
-                        </div>
-                        <div>
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
-                            <label class="label">
-                                <span class="label-text">default</span>
-                            </label>
-                            <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
-                        </div>
-                        <div>
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
-                            <label class="label">
-                                <span class="label-text">constraints</span>
-                            </label>
-                            <input type="text" placeholder="id" class="input input-bordered max-w-xs" />
-                        </div>
+                        <!-- svelte-ignore empty-block -->
+                        {#each columns as column}
+                            <Column columnData ={column}/>
+                        {/each}
                     </div>
                     <div class="w-1/6 p-4">
-                        <button class="btn btn-primary">Add Column</button>
+                        <button class="btn btn-primary" on:click={addColumn}>Add Column</button>
                     </div>
                 </div>
               <div class="modal-action">
