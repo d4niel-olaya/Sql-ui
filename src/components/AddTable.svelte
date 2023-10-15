@@ -10,8 +10,8 @@
         {
             id:1,
             columnName:"",
-            type:"",
-            constraint:"",
+            type:"text",
+            constraint:"primary-key",
             default:""
         }
     ]
@@ -25,8 +25,8 @@
         columns = columns.concat({
             id: (idLast.id + 1),
             columnName:"",
-            type:"a",
-            constraint : "",
+            type:"text",
+            constraint : "primary-key",
             default : ""
         });
     }
