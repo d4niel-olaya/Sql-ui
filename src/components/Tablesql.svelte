@@ -2,19 +2,58 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script lang="ts">
     import type { IColumnUI, ITable } from "../interfaces/base";
+    import { spring } from "svelte/motion";
+    import { onMount } from "svelte";
     export let model : ITable
     let modal : HTMLDialogElement
+    let div : HTMLDivElement
+    let x :number = 0;
+    let y : number = 0;
+    let isDragging = false;
+    
     function Open()
     {
         modal.showModal();
-       
     }
+
+    function down(e:MouseEvent)
+    {
+        isDragging = true;
+        x = e.clientX - div.getBoundingClientRect().left;
+        y = e.clientY - div.getBoundingClientRect().top;
+        div.style.cursor = "grabbing"
+    }
+
+    function move(e:MouseEvent)
+    {
+      if (isDragging) {
+          const newX = e.clientX - x;
+          const newY = e.clientY - y;
+
+          div.style.left = newX + "px";
+          div.style.top = newY + "px";
+        }
+    }
+
+    function up()
+    {
+      isDragging = false;
+      div.style.cursor = "grab";
+    }
+
+    
+
+
+
 </script>
 
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="card w-96 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
-on:click={Open}
+<div class="absolute cursor-grab card w-96 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
+bind:this={div}
+on:mousedown={down}
+on:mousemove={move}
+on:mouseup={up}
 >
     <div class="card-body">
       <h2 class="card-title">{model.tableName}</h2>
