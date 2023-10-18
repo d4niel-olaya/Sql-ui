@@ -19,6 +19,7 @@
     function down(e:MouseEvent)
     {
         isDragging = true;
+        console.log(div.getBoundingClientRect().top)
         x = e.clientX - div.getBoundingClientRect().left;
         y = e.clientY - div.getBoundingClientRect().top;
         div.style.cursor = "grabbing"
@@ -26,10 +27,11 @@
 
     function move(e:MouseEvent)
     {
-      if (isDragging) {
+      if (isDragging && (e.clientY - y) > 305) {
+        console.log(isDragging)
           const newX = e.clientX - x;
           const newY = e.clientY - y;
-
+          console.log(newY)
           div.style.left = newX + "px";
           div.style.top = newY + "px";
         }
@@ -50,6 +52,7 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="absolute cursor-grab card w-96 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
+
 bind:this={div}
 on:mousedown={down}
 on:mousemove={move}
