@@ -21,14 +21,15 @@
             <span class="label-text">{labels ? "type" : ""}</span>
         </label>
         <select class="select select-bordered max-w-xs" bind:value={columnData.type} >
-            <option value="text" class="option">text</option>
-            <option value="integer" class="option">integer</option>
-            <option value="real" class="option" >real</option>
-            <option value="boolean" class="option">boolean</option>
-            <option value="character" class="option">character</option>
+            <option value="int" class="option">int</option>
+            <option value="bigint" class="option">bigint</option>
+            <option value="varchar" class="option">varchar</option>
             <option value="date" class="option">date</option>
-            <option value="json" class="option">json</option>
-            <option value="serial" class="option">serial</option>
+            <option value="float" class="option">float</option>
+            <option value="boolean" class="option">boolean</option>
+            <option value="text" class="option">text</option>
+            <option value="decimal" class="option">decimal</option>
+            <option value="char" class="option">char</option>
           </select>
         
     </div>
@@ -49,6 +50,7 @@
         </label>
         <select class="select select-bordered max-w-xs w-screen" bind:value={columnData.constraint}>
             <option value="primary-key">Primary Key</option>
+            <option value="foreign-key">Foreign Key</option>
             <option value="not-null">Not Null</option>
             <option value="unique">Unique</option>
           </select>
