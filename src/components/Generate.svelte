@@ -2,9 +2,9 @@
     import { storageService } from "../services/storageService";
     import { scriptProvider } from "../services/scriptProvider";
     let service = new storageService();
-    let sctProvider = new scriptProvider(service.get())
     function generateScript()
     {
+        let sctProvider = new scriptProvider(service.get())
         sctProvider.iterateTables();
     }
 </script>
