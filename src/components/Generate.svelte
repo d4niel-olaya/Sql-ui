@@ -5,7 +5,8 @@
     function generateScript()
     {
         let sctProvider = new scriptProvider(service.get())
-        sctProvider.iterateTables();
+        console.log(sctProvider.iterateTables().join(""))
+        
     }
 </script>
 

@@ -8,20 +8,20 @@ export class scriptProvider{
     {
         this.tables = _tables;
     }
-    iterateTables() : void
+    iterateTables() : string[]
     {
         const result = this.tables.map((t) => this.generateSchema(t));
-        console.log(result);
+        return result;
     }
     generateSchema(table : ITable) : string
     {
         const sch = [];
-        sch.push("CREATE TABLE "+ table.tableName + " (");
+        sch.push("CREATE TABLE "+ table.tableName + " (" + "<br/>");
         for(const col of table.colums)
         {
-            sch.push(`${col.columnName} ${col.type} ${col.default}, ${col.constraint}`)
+            sch.push(`${col.columnName} ${col.type} ${col.default} ${col.constraint} <br/>`)
         }
-        sch.push(")")
-        return sch.join(",");
+        sch.push(");")
+        return sch.join("<br/>");
     }
 }
