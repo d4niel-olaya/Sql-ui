@@ -5,6 +5,8 @@ export interface ITable
     id : number;
     tableName: string;
     colums: IColumnUI []
+    x:number,
+    y:number
 }
 
 export interface IColumnUI

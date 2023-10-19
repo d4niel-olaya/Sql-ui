@@ -12,7 +12,9 @@
     let newTable : ITable = {
         id: 0,
         tableName: "",
-        colums: []
+        colums: [],
+        x:0,
+        y:0
     }
 
     function Open()

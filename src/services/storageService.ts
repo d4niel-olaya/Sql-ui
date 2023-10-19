@@ -21,4 +21,12 @@ export class storageService
         return table
     }
 
+
+    getById(id:number) : ITable[]
+    {
+        const tables = this.get();
+        const table = tables.filter(t => t.id == id);
+        return table;
+    }
+
 }
