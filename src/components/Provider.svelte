@@ -4,8 +4,8 @@
     <label for="provider" class="label mx-auto">
         <span class="label-text">Provider</span>
     </label>
-    <select id="provider" class="select select-bordered">
-        <option value="mysql" class="option">MySql</option>
+    <select id="provider" class="select select-bordered" disabled>
+        <option value="mysql" class="option">MySql - coming soon</option>
         <option value="postgresql" class="option">PostgreSql</option>
         <option value="sqlserver" class="option">Sql Server</option>
     </select>

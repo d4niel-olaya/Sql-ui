@@ -1,6 +1,6 @@
 
 
-enum columnTypes
+export enum columnTypes
 {
     BIGINT = 'bigint',
     INT = 'int',
@@ -14,7 +14,7 @@ enum columnTypes
 }
 
 
-enum columnConstraints
+export enum columnConstraints
 {
     NOT_NULL = 'NOT NULL',
     UNIQUE = 'UNIQUE',

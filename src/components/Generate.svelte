@@ -1,9 +1,11 @@
 <script lang="ts">
     import { storageService } from "../services/storageService";
-
+    import { scriptProvider } from "../services/scriptProvider";
+    let service = new storageService();
+    let sctProvider = new scriptProvider(service.get())
     function generateScript()
     {
-        
+        sctProvider.iterateTables();
     }
 </script>
 

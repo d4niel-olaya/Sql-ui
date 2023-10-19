@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { IColumnUI } from "../interfaces/base";
+    import { columnConstraints, columnTypes } from "../interfaces/enumsql";
     export let columnData : IColumnUI 
    export let labels : boolean;
 </script>
@@ -21,15 +22,15 @@
             <span class="label-text">{labels ? "type" : ""}</span>
         </label>
         <select class="select select-bordered max-w-xs" bind:value={columnData.type} >
-            <option value="int" class="option">int</option>
-            <option value="bigint" class="option">bigint</option>
-            <option value="varchar" class="option">varchar</option>
-            <option value="date" class="option">date</option>
-            <option value="float" class="option">float</option>
-            <option value="boolean" class="option">boolean</option>
-            <option value="text" class="option">text</option>
-            <option value="decimal" class="option">decimal</option>
-            <option value="char" class="option">char</option>
+            <option value="{columnTypes.INT}" class="option">{columnTypes.INT}</option>
+            <option value="{columnTypes.BIGINT}" class="option">{columnTypes.BIGINT}</option>
+            <option value="{columnTypes.VARCHAR}" class="option">{columnTypes.VARCHAR}</option>
+            <option value="{columnTypes.DATE}" class="option">{columnTypes.DATE}</option>
+            <option value="{columnTypes.FLOAT}" class="option">{columnTypes.FLOAT}</option>
+            <option value="{columnTypes.BOOLEAN}" class="option">{columnTypes.BOOLEAN}</option>
+            <option value="{columnTypes.TEXT}" class="option">{columnTypes.TEXT}</option>
+            <option value="{columnTypes.DECIMAL}" class="option">{columnTypes.DECIMAL}</option>
+            <option value="{columnTypes.CHAR}" class="option">{columnTypes.CHAR}</option>
           </select>
         
     </div>
@@ -49,10 +50,10 @@
             <span class="label-text">{labels ? "constraint" : ""}</span>
         </label>
         <select class="select select-bordered max-w-xs w-screen" bind:value={columnData.constraint}>
-            <option value="primary-key">Primary Key</option>
-            <option value="foreign-key">Foreign Key</option>
-            <option value="not-null">Not Null</option>
-            <option value="unique">Unique</option>
+            <option value="{columnConstraints.PRIMARY_KEY}">{columnConstraints.PRIMARY_KEY}</option>
+            <option value="{columnConstraints.FOREIGN_KEY}">{columnConstraints.FOREIGN_KEY}</option>
+            <option value="{columnConstraints.NOT_NULL}">{columnConstraints.PRIMARY_KEY}</option>
+            <option value="{columnConstraints.UNIQUE}">{columnConstraints.UNIQUE}</option>
           </select>
         
     </div>
