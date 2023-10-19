@@ -13,8 +13,8 @@
         id: 0,
         tableName: "",
         colums: [],
-        x:0,
-        y:0
+        x:100,
+        y:305
     }
 
     function Open()

@@ -2,9 +2,12 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script lang="ts">
     import type { IColumnUI, ITable } from "../interfaces/base";
-    import { spring } from "svelte/motion";
+    import { storageService } from "../services/storageService";
     import { onMount } from "svelte";
+    import { listTables } from "../services/list";
     export let model : ITable
+    let tableStorage : ITable
+    let service = new storageService();
     let modal : HTMLDialogElement
     let div : HTMLDivElement
     let x :number = 0;
@@ -34,6 +37,8 @@
           console.log(newY)
           div.style.left = newX + "px";
           div.style.top = newY + "px";
+          service.updateCoords(model.id,newX,newY);
+          listTables.set(service.get()); // using svelte store to update the state
         }
     }
 
@@ -41,8 +46,15 @@
     {
       isDragging = false;
       div.style.cursor = "grab";
+      //service.updateCoords(model.id,x,y);
     }
 
+
+    onMount(()=>
+    {
+      div.style.left = model.x + "px";
+      div.style.top = model.y + "px";
+    });
     
 
 

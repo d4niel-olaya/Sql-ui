@@ -22,11 +22,20 @@ export class storageService
     }
 
 
-    getById(id:number) : ITable[]
+    getById(id:number) : ITable
     {
         const tables = this.get();
         const table = tables.filter(t => t.id == id);
-        return table;
+        return table[0];
     }
+
+    updateCoords(id:number, x:number,y:number)
+    {
+        let tables: ITable[] = this.get();
+        let index = tables.findIndex(t => t.id == id);
+        tables[index].x = x;
+        tables[index].y = y;
+        localStorage.setItem("tables", JSON.stringify(tables));
+     }
 
 }
