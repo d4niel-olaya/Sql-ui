@@ -29,7 +29,7 @@
 
     function move(e:MouseEvent)
     {
-      if (isDragging && (e.clientY - y) > 305) {
+      if (isDragging && (e.clientY - y) > 305 && (e.clientX-x) < 1183) {
           const newX = e.clientX - x;
           const newY = e.clientY - y;
           
