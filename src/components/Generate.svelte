@@ -1,12 +1,12 @@
 <script lang="ts">
+    import { script } from "../services/scriptSql";
     import { storageService } from "../services/storageService";
     import { scriptProvider } from "../services/scriptProvider";
-    let service = new storageService();
     function generateScript()
     {
-        let sctProvider = new scriptProvider(service.get())
-        console.log(sctProvider.iterateTables().join(""))
-        
+        let service = new storageService();
+        let sctProvider = new scriptProvider(service.get());
+        script.set(sctProvider.iterateTables());
     }
 </script>
 
