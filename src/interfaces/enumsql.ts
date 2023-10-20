@@ -17,6 +17,7 @@ export enum columnTypes
 export enum columnConstraints
 {
     NOT_NULL = 'NOT NULL',
+    NULL = 'NULL',
     UNIQUE = 'UNIQUE',
     PRIMARY_KEY = 'PRIMARY KEY',
     FOREIGN_KEY = 'FOREIGN KEY',

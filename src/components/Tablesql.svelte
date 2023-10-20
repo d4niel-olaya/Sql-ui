@@ -22,7 +22,6 @@
     function down(e:MouseEvent)
     {
         isDragging = true;
-        console.log(div.getBoundingClientRect().top)
         x = e.clientX - div.getBoundingClientRect().left;
         y = e.clientY - div.getBoundingClientRect().top;
         div.style.cursor = "grabbing"
@@ -31,10 +30,9 @@
     function move(e:MouseEvent)
     {
       if (isDragging && (e.clientY - y) > 305) {
-        console.log(isDragging)
           const newX = e.clientX - x;
           const newY = e.clientY - y;
-          console.log(newY)
+          
           div.style.left = newX + "px";
           div.style.top = newY + "px";
           service.updateCoords(model.id,newX,newY);

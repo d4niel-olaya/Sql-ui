@@ -11,17 +11,23 @@ export class scriptProvider{
     iterateTables() : string[]
     {
         const result = this.tables.map((t) => this.generateSchema(t));
-        return result;
+        //console.log(result.join("").split(","))
+        return result.join("").split(",");
     }
     generateSchema(table : ITable) : string
     {
         const sch = [];
-        sch.push("CREATE TABLE "+ table.tableName + " (" + "<br/>");
+        sch.push("CREATE TABLE "+ table.tableName + " (");
         for(const col of table.colums)
         {
-            sch.push(`${col.columnName} ${col.type} ${col.default} ${col.constraint} <br/>`)
+            if(table.colums.length == 1)
+            {
+                sch.push(`${col.columnName} ${col.type} ${col.default} ${col.constraint} `)
+            }else{
+                sch.push(`${col.columnName} ${col.type} ${col.default} ${col.constraint}, `)
+            }
         }
-        sch.push(");")
-        return sch.join("<br/>");
+        sch.push("); \n")
+        return sch.join("");
     }
 }

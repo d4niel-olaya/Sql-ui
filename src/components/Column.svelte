@@ -53,6 +53,7 @@
             <option value="{columnConstraints.PRIMARY_KEY}">{columnConstraints.PRIMARY_KEY}</option>
             <option value="{columnConstraints.FOREIGN_KEY}">{columnConstraints.FOREIGN_KEY}</option>
             <option value="{columnConstraints.NOT_NULL}">{columnConstraints.NOT_NULL}</option>
+            <option value="{columnConstraints.NULL}">{columnConstraints.NULL}</option>
             <option value="{columnConstraints.UNIQUE}">{columnConstraints.UNIQUE}</option>
           </select>
         
