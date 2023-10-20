@@ -17,15 +17,18 @@ export class scriptProvider{
     generateSchema(table : ITable) : string
     {
         const sch = [];
+        let separator : string;
         sch.push("CREATE TABLE "+ table.tableName + " (");
-        for(const col of table.colums)
+        for(let i = 0; i < table.colums.length ; i++)
         {
-            if(table.colums.length == 1)
+            if(table.colums.length == 1  ||  i == (table.colums.length-1))
             {
-                sch.push(`${col.columnName} ${col.type} ${col.default} ${col.constraint} `)
+                separator = ""
             }else{
-                sch.push(`${col.columnName} ${col.type} ${col.default} ${col.constraint}, `)
+                separator = ","
             }
+            let defaultvalue = table.colums[i].default  != "" ? `DEFAULT ${table.colums[i].default}` : "";
+            sch.push(`${table.colums[i].columnName} ${table.colums[i].type} ${defaultvalue} ${table.colums[i].constraint} ${separator}`)
         }
         sch.push("); \n")
         return sch.join("");
