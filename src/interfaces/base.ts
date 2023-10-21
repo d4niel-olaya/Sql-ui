@@ -6,7 +6,9 @@ export interface ITable
     tableName: string;
     colums: IColumnUI []
     x:number,
-    y:number
+    y:number,
+    w:number,
+    h:number
 }
 
 export interface IColumnUI

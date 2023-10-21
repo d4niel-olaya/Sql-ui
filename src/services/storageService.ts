@@ -38,4 +38,13 @@ export class storageService
         localStorage.setItem("tables", JSON.stringify(tables));
      }
 
+     updateDimensions(id:number, w:number,h:number)
+     {
+        let tables: ITable[] = this.get();
+        let index = tables.findIndex(t => t.id == id);
+        tables[index].w = w;
+        tables[index].h = h;
+        localStorage.setItem("tables", JSON.stringify(tables));
+     }
+
 }

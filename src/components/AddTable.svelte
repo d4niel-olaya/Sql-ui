@@ -14,7 +14,9 @@
         tableName: "",
         colums: [],
         x:100,
-        y:305
+        y:305,
+        w:0,
+        h:0
     }
 
     function Open()
