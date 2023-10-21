@@ -4,8 +4,12 @@
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
     import { listTables } from "../services/list";
+    import { onMount } from "svelte";
     const service = new storageService()
+    let divContainer : HTMLDivElement
     let canvas : HTMLCanvasElement
+    let w :number;
+    let h : number;
     
     function loadTables() : ITable[]
     {
@@ -16,17 +20,32 @@
     function click()
     {
         let ctx = canvas.getContext("2d");
-        ctx?.moveTo(10,10);
-        ctx?.lineTo(180,180);
+        
+        ctx?.beginPath();
+        ctx?.moveTo(0,0);
+        ctx?.lineTo(20,100);
         ctx?.stroke();
     }
     
+    onMount(() =>
+    {
+        w = divContainer.getBoundingClientRect().width
+        h = divContainer.getBoundingClientRect().height
+    })
+
+   addEventListener("resize",()=>
+   {
+        w = divContainer.getBoundingClientRect().width
+        h = divContainer.getBoundingClientRect().height
+   }
+    )
+
+
 </script>
 
 
-<div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen"> 
-    <canvas id="canvas" class="absolute w-full  h-screen" bind:this={canvas}>
-
+<div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen" bind:this={divContainer}> 
+    <canvas id="canvas" class="absolute" width="{w}px" height="{h}px" bind:this={canvas} on:click={click}>
       </canvas>
     <div class="absolute form-control w-44">
         <label class="cursor-pointer label">
