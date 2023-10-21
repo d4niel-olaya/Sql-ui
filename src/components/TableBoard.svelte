@@ -16,6 +16,12 @@
 
 
 <div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen"> 
+    <div class="form-control w-44">
+        <label class="cursor-pointer label">
+            <input type="checkbox" class="toggle toggle-primary" checked disabled/>
+            <span class="label-text">Show table details</span> 
+        </label>
+      </div>
     {#if $listTables.length > 0}
         {#each $listTables as table}
             <Tablesql model={table}/>
