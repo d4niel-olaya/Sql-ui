@@ -3,6 +3,7 @@
 <script lang="ts">
     import type { IColumnUI, ITable } from "../interfaces/base";
     import { storageService } from "../services/storageService";
+    import { boardLeft,boardTop } from "../services/board";
     import { onMount } from "svelte";
     import { listTables } from "../services/list";
     export let model : ITable
@@ -29,7 +30,7 @@
 
     function move(e:MouseEvent)
     {
-      if (isDragging && (e.clientY - y) > 305 && (e.clientX-x) < 1183) {
+      if (isDragging && (e.clientY - y) > 305 && (e.clientX-x) < ($boardLeft-model.w)) {
           const newX = e.clientX - x;
           const newY = e.clientY - y;
           

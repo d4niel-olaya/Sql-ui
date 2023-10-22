@@ -4,6 +4,7 @@
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
     import { listTables } from "../services/list";
+    import { boardLeft,boardTop } from "../services/board";
     import { onMount } from "svelte";
     const service = new storageService()
     let divContainer : HTMLDivElement
@@ -55,6 +56,8 @@
     {
         w = divContainer.getBoundingClientRect().width
         h = divContainer.getBoundingClientRect().height
+        boardLeft.set(divContainer.getBoundingClientRect().width);
+        //boardTop.set(divContainer.getBoundingClientRect().height);
     }
 
 
