@@ -7,9 +7,21 @@
     import TableBoard from "../components/TableBoard.svelte";
     import Tablesql from "../components/Tablesql.svelte";
     import arrowsql from "$lib/assets/arrowsql.svg";
+    import { dimensionService } from "../services/dimensionService";
+    import { mainContainer } from "../services/board";
+    import { onMount } from "svelte";
+    let maincontainer: HTMLDivElement
+  onMount(()=>
+    {
+      const service = new dimensionService();
+      service.setMainDimension(maincontainer.getBoundingClientRect().height)
+      mainContainer.set(service.getMainDimension());
+    }
+  )
+  
 </script>
     <Logo/>
-  <div class="flex flex-wrap justify-around mt-5 w-screen">
+  <div class="flex flex-wrap justify-around mt-5 w-screen" bind:this={maincontainer}>
     <CodeResult/>
     <div class="flex flex-col items-center">
         <AddTable/>

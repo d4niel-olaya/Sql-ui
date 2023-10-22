@@ -4,7 +4,7 @@
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
     import { listTables } from "../services/list";
-    import { boardLeft,boardTop } from "../services/board";
+    import { boardLeft,boardTop,mainContainer} from "../services/board";
     import { dimensionService } from "../services/dimensionService";
     import { onMount } from "svelte";
 
@@ -23,18 +23,25 @@
     {
         let ctx = canvas.getContext("2d");
         ctx?.clearRect(0, 0, canvas.width, canvas.height);
-        $listTables.forEach(table => {
+        let h=0;
+        let h2 = 0
+        /*$listTables.forEach(table => {
+            h = table.y > ($mainContainer+table.h) ? table.y - ($mainContainer+table.h)  : ($mainContainer+table.h) - table.y
+            console.log(h, "main")
+            console.log(table.y)
            // ctx?.fillStyle = table.isDragging ? 'red' : 'blue';
-            ctx?.fillRect(table.x, table.y, table.w, table.h);
-        });
+            ctx?.fillRect(table.x, h, table.w, table.h);
+        });*/
        $listTables.forEach((table1, index1) => {
             $listTables.forEach((table2, index2) => {
             if (index1 !== index2) {
+                h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
+                h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
                 const x1 =  table1.x + table1.w / 2 ;
                 
-                const y1 = table1.y + table1.h / 2;
+                const y1 = h + table1.h / 2;
                 const x2 = table2.x + table2.w  / 2;
-                const y2 = table2.y + table2.h / 2 ;
+                const y2 = h2 + table2.h / 2 ;
                 console.log(x1,y1,x2,y2)
                 console.log(table1.x,table1.y)
                 ctx?.beginPath();

@@ -14,4 +14,19 @@ export class dimensionService
         }
         return 0;
     }
+
+    setMainDimension(d:number):void
+    {
+        localStorage.setItem("main-dimension", d.toString())
+    }
+
+    getMainDimension() : number
+    {
+        let result = localStorage.getItem("main-dimension") || null
+        if(result != null)
+        {
+            return parseInt(result)
+        }
+        return 0;
+    }
 }
