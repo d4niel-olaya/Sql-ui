@@ -2,6 +2,7 @@
 <script  lang="ts">
     import type { IColumnUI, ITable } from "../interfaces/base";
     import { storageService } from "../services/storageService";
+    import { mainContainer } from "../services/board";
     import { list } from "postcss";
     import Column from "./Column.svelte";
     import { listTables } from "../services/list";
@@ -14,7 +15,7 @@
         tableName: "",
         colums: [],
         x:100,
-        y:305,
+        y:$mainContainer + 96,
         w:0,
         h:0
     }
