@@ -51,7 +51,7 @@
 
     onMount(()=>
     {
-      div.style.left = model.x + "px";
+      div.style.left = model.x  + "px";
       div.style.top = model.y + "px";
       service.updateDimensions(model.id,div.getBoundingClientRect().width,div.getBoundingClientRect().height) // Updating table dimensions
       listTables.set(service.get());
@@ -65,7 +65,6 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="absolute cursor-grab card w-72 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
-
 bind:this={div}
 on:mousedown={down}
 on:mousemove={move}

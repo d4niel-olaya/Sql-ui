@@ -5,8 +5,9 @@
     import { storageService } from "../services/storageService";
     import { listTables } from "../services/list";
     import { boardLeft,boardTop } from "../services/board";
+    import { dimensionService } from "../services/dimensionService";
     import { onMount } from "svelte";
-    const service = new storageService()
+
     let divContainer : HTMLDivElement
     let canvas : HTMLCanvasElement
     let w :number;
@@ -29,16 +30,18 @@
        $listTables.forEach((table1, index1) => {
             $listTables.forEach((table2, index2) => {
             if (index1 !== index2) {
-                const x1 = (305- table1.x) + table1.w / 2 ;
+                const x1 =  table1.x + table1.w / 2 ;
                 
                 const y1 = table1.y + table1.h / 2;
-                const x2 = (305-table2.x) + table2.w  / 2;
+                const x2 = table2.x + table2.w  / 2;
                 const y2 = table2.y + table2.h / 2 ;
                 console.log(x1,y1,x2,y2)
                 console.log(table1.x,table1.y)
                 ctx?.beginPath();
-                ctx?.moveTo(table1.x, table1.y);
-                ctx?.lineTo(table2.x, table2.y);
+                //ctx?.moveTo(table1.x, table1.y);
+                //ctx?.lineTo(table2.x, table2.y);
+                ctx?.moveTo(x1, y1);
+                ctx?.lineTo(x2, y2);
                 ctx?.stroke();
             }
             });
@@ -68,18 +71,29 @@
 
     function setDimensions() : void
     {
+        const dService = new dimensionService()
+        const service = new storageService()
         w = divContainer.getBoundingClientRect().width
         h = divContainer.getBoundingClientRect().height
         canvas.width = w;
         canvas.height =h
-        boardLeft.set(divContainer.getBoundingClientRect().width);
+        dService.setDimension(w);
+        $listTables.forEach((table,index) =>{
+            if(table.x > $boardLeft)
+            {
+                service.updateCoords(table.id,$boardLeft - 288,table.y);
+            }
+        })
+        boardLeft.set(dService.getDimension())
+        listTables.set(service.get())
+    
         //boardTop.set(divContainer.getBoundingClientRect().height);
     }
 
 
 </script>
 
-
+<button on:click={click}>Click</button>
 <div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen" bind:this={divContainer}> 
     <canvas id="canvas" class="absolute" bind:this={canvas} >
       </canvas>
