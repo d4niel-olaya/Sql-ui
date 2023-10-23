@@ -6,8 +6,10 @@
     import { list } from "postcss";
     import Column from "./Column.svelte";
     import { listTables } from "../services/list";
+    import { dimensionService } from "../services/dimensionService";
     let modal : HTMLDialogElement
     let service = new storageService();
+    let dService = new dimensionService();
     let tables : ITable[];
     let columns : IColumnUI[] = []
     let newTable : ITable = {
@@ -15,7 +17,7 @@
         tableName: "",
         colums: [],
         x:100,
-        y:$mainContainer + 96,
+        y:dService.getMainDimension() + 96,
         w:0,
         h:0
     }
