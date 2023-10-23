@@ -68,6 +68,7 @@
     onMount(() =>
     {
         setDimensions();
+        click()
     })
 
    addEventListener("resize",()=>
@@ -100,7 +101,6 @@
 
 </script>
 
-<button on:click={click}>Click</button>
 <div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen" bind:this={divContainer}> 
     <canvas id="canvas" class="absolute" bind:this={canvas} >
       </canvas>
@@ -112,7 +112,7 @@
       </div>
     {#if $listTables.length > 0}
         {#each $listTables as table}
-            <Tablesql model={table}/>
+            <Tablesql model={table} canvas={canvas}/>
         {/each}
     {/if}
 </div>

@@ -6,7 +6,9 @@
     import { boardLeft,boardTop } from "../services/board";
     import { onMount } from "svelte";
     import { listTables } from "../services/list";
+    import { mainContainer } from "../services/board";
     export let model : ITable
+    export let canvas : HTMLCanvasElement
     let tableStorage : ITable
     let service = new storageService();
     let modal : HTMLDialogElement
@@ -31,6 +33,8 @@
     function move(e:MouseEvent)
     {
       if (isDragging && (e.clientY - y) > 305 && (e.clientX-x) < ($boardLeft-model.w)) {
+          let ctx = canvas.getContext("2d");
+          ctx?.reset(); // reset canvas
           const newX = e.clientX - x;
           const newY = e.clientY - y;
           
@@ -45,7 +49,35 @@
     {
       isDragging = false;
       div.style.cursor = "grab";
+      drawLines();
       //service.updateCoords(model.id,x,y);
+    }
+    function drawLines() : void
+    {
+      let h = 0;
+      let h2 = 0;
+      let ctx = canvas.getContext("2d");
+      $listTables.forEach((table1, index1) => {
+            $listTables.forEach((table2, index2) => {
+            if (index1 !== index2) {
+                h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
+                h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
+                const x1 =  table1.x + table1.w / 2 ;
+                
+                const y1 = h + table1.h / 2;
+                const x2 = table2.x + table2.w  / 2;
+                const y2 = h2 + table2.h / 2 ;
+                console.log(x1,y1,x2,y2)
+                console.log(table1.x,table1.y)
+                ctx?.beginPath();
+                //ctx?.moveTo(table1.x, table1.y);
+                //ctx?.lineTo(table2.x, table2.y);
+                ctx?.moveTo(x1, y1);
+                ctx?.lineTo(x2, y2);
+                ctx?.stroke();
+            }
+            });
+      });
     }
 
 
