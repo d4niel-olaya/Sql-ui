@@ -17,7 +17,7 @@
         tableName: "",
         colums: [],
         x:100,
-        y:dService.getMainDimension() + 96,
+        y:350,
         w:0,
         h:0
     }
