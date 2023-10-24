@@ -28,6 +28,7 @@
         isDragging = true;
         div.addEventListener('mouseup',  u)
         div.addEventListener('mousemove',m)
+        div.addEventListener("mouseleave", leave)
         event.stopImmediatePropagation()
        
     }
@@ -43,12 +44,17 @@
       //event.preventDefault()
       div.removeEventListener('mousemove',m)
       div.removeEventListener('mouseup',u)
+      div.removeEventListener("mouseleave", leave)
       event.preventDefault()
       event.stopImmediatePropagation()
       event.stopPropagation()
       div.style.cursor = "grab";
       drawLines();
       
+    }
+    function leave()
+    {
+      isDragging = false;
     }
 
     function m(event:MouseEvent)

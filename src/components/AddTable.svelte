@@ -60,7 +60,7 @@
     function createTable()
     {
         newTable.id = tables.length > 0 ? (tables[tables.length - 1].id + 1) : 1;
-        newTable.y = 500
+        newTable.y = $mainContainer
         newTable.colums = columns;
         service.create(newTable);
         listTables.set(service.get()); // updating state
