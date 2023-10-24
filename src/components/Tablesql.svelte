@@ -53,7 +53,7 @@
 
     function m(event:MouseEvent)
     {
-      if (isDragging && (event.clientY - y) > 305 && (event.clientX-x) < ($boardLeft-model.w)) {
+      if (isDragging && (event.clientY - y) > 305 && (event.clientX-x) < ($boardLeft-model.w) && event.clientX > 100) {
         event.preventDefault()
         let ctx = canvas.getContext("2d");
         ctx?.reset(); // reset canvas
