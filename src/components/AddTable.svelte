@@ -17,7 +17,7 @@
         tableName: "",
         colums: [],
         x:100,
-        y:350,
+        y:0,
         w:0,
         h:0
     }
@@ -60,6 +60,7 @@
     function createTable()
     {
         newTable.id = tables.length > 0 ? (tables[tables.length - 1].id + 1) : 1;
+        newTable.y = $mainContainer + 100;
         newTable.colums = columns;
         service.create(newTable);
         listTables.set(service.get()); // updating state
