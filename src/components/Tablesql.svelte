@@ -21,7 +21,54 @@
     {
         modal.showModal();
     }
+    function d(event:MouseEvent)
+    {
+        x = event.clientX - model.x;
+        y = event.clientY - model.y;
+        isDragging = true;
+        div.addEventListener('mouseup',  u)
+        div.addEventListener('mousemove',m)
+        event.stopImmediatePropagation()
+       
+    }
 
+    function u(event:MouseEvent)
+    {
+      
+      //x = event.clientX
+		  //y = event.clientY
+      
+      isDragging = false
+      
+      //event.preventDefault()
+      div.removeEventListener('mousemove',m)
+      div.removeEventListener('mouseup',u)
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      event.stopPropagation()
+      div.style.cursor = "grab";
+      drawLines();
+      
+    }
+
+    function m(event:MouseEvent)
+    {
+      if (isDragging && (event.clientY - y) > 305 && (event.clientX-x) < ($boardLeft-model.w)) {
+        event.preventDefault()
+        let ctx = canvas.getContext("2d");
+        ctx?.reset(); // reset canvas
+        console.log(isDragging, "dragging")
+        const dx = event.clientX - x;
+        const dy = event.clientY - y;
+        div.style.left = dx+ "px";
+        div.style.top = dy+ "px";
+        service.updateCoords(model.id,dx,dy);
+        listTables.set(service.get());
+        event.stopImmediatePropagation()
+        event.stopPropagation()
+        
+      }
+    }
     function down(e:MouseEvent)
     {
         isDragging = true;
@@ -96,11 +143,11 @@
 
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore redundant-event-modifier -->
 <div class="absolute cursor-grab card w-72 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
 bind:this={div}
-on:mousedown={down}
-on:mousemove={move}
-on:mouseup={up}
+on:mousedown|stopPropagation={d}
+
 >
     <div class="card-body">
       <h2 class="card-title">{model.tableName}</h2>
