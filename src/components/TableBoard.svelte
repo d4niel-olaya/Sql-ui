@@ -7,7 +7,7 @@
     import { boardLeft,boardTop,mainContainer} from "../services/board";
     import { dimensionService } from "../services/dimensionService";
     import { onMount } from "svelte";
-
+    let toogle : HTMLDivElement
     let divContainer : HTMLDivElement
     let canvas : HTMLCanvasElement
     let w :number;
@@ -67,6 +67,9 @@
     
     onMount(() =>
     {
+        const service = new dimensionService();
+        service.setMainDimension(toogle.getBoundingClientRect().y)
+        mainContainer.set(toogle.getBoundingClientRect().y)
         setDimensions();
         click()
     })
@@ -104,7 +107,7 @@
 <div class="w-full mt-2 overflow-hidden bg-slate-700 h-screen" bind:this={divContainer}> 
     <canvas id="canvas" class="absolute" bind:this={canvas} >
       </canvas>
-    <div class="absolute form-control w-44">
+    <div class="absolute form-control w-44" bind:this={toogle}>
         <label class="cursor-pointer label">
             <input type="checkbox" class="toggle toggle-primary" checked disabled/>
             <span class="label-text">Show table details</span> 
