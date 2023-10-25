@@ -110,27 +110,31 @@
       let h = 0;
       let h2 = 0;
       let ctx = canvas.getContext("2d");
-      $listTables.forEach((table1, index1) => {
-            $listTables.forEach((table2, index2) => {
-            if (index1 !== index2) {
-                h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
-                h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
-                const x1 =  table1.x + table1.w / 2 ;
-                
-                const y1 = h + table1.h / 2;
-                const x2 = table2.x + table2.w  / 2;
-                const y2 = h2 + table2.h / 2 ;
-                console.log(x1,y1,x2,y2)
-                console.log(table1.x,table1.y)
-                ctx?.beginPath();
-                //ctx?.moveTo(table1.x, table1.y);
-                //ctx?.lineTo(table2.x, table2.y);
-                ctx?.moveTo(x1, y1);
-                ctx?.lineTo(x2, y2);
-                ctx?.stroke();
-            }
-            });
-      });
+      if(ctx != null)
+      {
+        ctx.strokeStyle = "#94a3b8"
+        $listTables.forEach((table1, index1) => {
+              $listTables.forEach((table2, index2) => {
+              if (index1 !== index2) {
+                  h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
+                  h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
+                  const x1 =  table1.x + table1.w / 2 ;
+                  
+                  const y1 = h + table1.h / 2;
+                  const x2 = table2.x + table2.w  / 2;
+                  const y2 = h2 + table2.h / 2 ;
+                  //console.log(x1,y1,x2,y2)
+                  //console.log(table1.x,table1.y)
+                  ctx?.beginPath();
+                  //ctx?.moveTo(table1.x, table1.y);
+                  //ctx?.lineTo(table2.x, table2.y);
+                  ctx?.moveTo(x1, y1);
+                  ctx?.lineTo(x2, y2);
+                  ctx?.stroke();
+              }
+              });
+        });
+      }
     }
 
 
