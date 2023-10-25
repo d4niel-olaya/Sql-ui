@@ -2,7 +2,7 @@
 <script  lang="ts">
     import type { IColumnUI, ITable } from "../interfaces/base";
     import { storageService } from "../services/storageService";
-    import { mainContainer } from "../services/board";
+    import { boardLeft, mainContainer } from "../services/board";
     import { list } from "postcss";
     import Column from "./Column.svelte";
     import { listTables } from "../services/list";
@@ -60,7 +60,7 @@
     function createTable()
     {
         newTable.id = tables.length > 0 ? (tables[tables.length - 1].id + 1) : 1;
-        newTable.y = $mainContainer
+        newTable.y = $boardLeft / 2
         newTable.colums = columns;
         service.create(newTable);
         listTables.set(service.get()); // updating state
