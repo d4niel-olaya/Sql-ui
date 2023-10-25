@@ -2,7 +2,7 @@
     import type { IColumnUI } from "../interfaces/base";
     import { columnConstraints, columnTypes } from "../interfaces/enumsql";
     export let columnData : IColumnUI 
-   export let labels : boolean;
+    export let labels : boolean;
 </script>
  
 
@@ -34,6 +34,15 @@
           </select>
         
     </div>
+    {#if columnData.type == columnTypes.VARCHAR}
+        <div>
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label class="label">
+                <span class="label-text">{labels ? "length" : ""}</span>
+            </label>
+            <input type="number" class="input input-bordered max-w-xs" bind:value={columnData.length} min="1" max="255">
+        </div>
+    {/if}
     <div>
         <!-- svelte-ignore a11y-label-has-associated-control -->
         

@@ -28,7 +28,7 @@ export class scriptProvider{
                 separator = ","
             }
             let defaultvalue = table.colums[i].default  != "" ? `DEFAULT ${table.colums[i].default}` : "";
-            sch.push(`${table.colums[i].columnName} ${table.colums[i].type} ${defaultvalue} ${table.colums[i].constraint} ${separator}`)
+            sch.push(`${table.colums[i].columnName} ${table.colums[i].type} ${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue} ${table.colums[i].constraint} ${separator}`)
         }
         sch.push("); \n")
         return sch.join("");

@@ -15,7 +15,8 @@ export interface IColumnUI
 {
     id: number
     columnName : string;
-    type:string
+    type:string;
+    length:string;
     default:string
     constraint : string
 }

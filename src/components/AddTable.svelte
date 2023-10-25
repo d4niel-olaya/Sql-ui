@@ -30,7 +30,8 @@
                 columnName:"",
                 type:"text",
                 constraint:"primary-key",
-                default:""
+                default:"",
+                length:""
             }
         ]
         tables = service.get(); //getting tables from localstorage
@@ -47,7 +48,8 @@
             columnName:"",
             type:"text",
             constraint : "primary-key",
-            default : ""
+            default : "",
+            length:""
         });
     }
 
