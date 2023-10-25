@@ -29,4 +29,17 @@ export class dimensionService
         }
         return 0;
     }
+
+    setToggleDimension(d:number):void{
+        localStorage.setItem("toggle-dimension", d.toString())
+    }
+    getToggleDimension() :number
+    {
+        let result = localStorage.getItem("toggle-dimension") || null
+        if(result != null)
+        {
+            return parseInt(result)
+        }
+        return 0;
+    }
 }

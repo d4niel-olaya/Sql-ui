@@ -4,7 +4,7 @@
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
     import { listTables } from "../services/list";
-    import { boardLeft,boardTop,mainContainer} from "../services/board";
+    import { boardLeft,toogleContainer,mainContainer} from "../services/board";
     import { dimensionService } from "../services/dimensionService";
     import { onMount } from "svelte";
     let toogle : HTMLDivElement
@@ -68,8 +68,8 @@
     onMount(() =>
     {
         const service = new dimensionService();
-        service.setMainDimension(toogle.getBoundingClientRect().y)
-        mainContainer.set(toogle.getBoundingClientRect().y)
+        service.setToggleDimension(toogle.getBoundingClientRect().y)
+        toogleContainer.set(toogle.getBoundingClientRect().y)
         setDimensions();
         click()
     })
