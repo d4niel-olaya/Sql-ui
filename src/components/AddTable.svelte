@@ -93,7 +93,7 @@
                         <span class="label-text">Table name</span>
                     </label>
                     <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" bind:value={newTable.tableName}/>
-                    <div class="flex flex-wrap flex-row justify-around w-full">
+                    <div class="flex flex-wrap flex-row justify-evenly justify-items-center w-full">
                         <!-- svelte-ignore empty-block -->
                         {#if columns.length > 0}
                             {#each columns as column, i}
