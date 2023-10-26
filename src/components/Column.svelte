@@ -10,6 +10,7 @@
         if(columnData.type == columnTypes.VARCHAR)
         {
            // widthConstraint = "w-3/4"
+           columnData.length = "100"
            widthConstraint = "w-full"
            widthDefault = "w-full"
         }else{
@@ -27,7 +28,7 @@
             <span class="label-text">{labels == true ? "colunm name" : ""}</span>
         </label>
         
-        <input type="text" placeholder="id" class="input input-bordered max-w-xs" bind:value={columnData.columnName} />
+        <input type="text" placeholder="id" class="input input-bordered max-w-xs" bind:value={columnData.columnName} minlength="1" required/>
     </div>
     <div>
         <!-- svelte-ignore a11y-label-has-associated-control -->
