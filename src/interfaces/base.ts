@@ -17,8 +17,14 @@ export interface IColumnUI
     columnName : string;
     type:string;
     length:string;
-    default:string
+    default:IDefault
     constraint : string
+}
+
+export interface IDefault
+{
+    custom:boolean
+    value:string
 }
          
 

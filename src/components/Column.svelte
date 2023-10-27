@@ -3,6 +3,7 @@
     import { columnConstraints, columnTypes } from "../interfaces/enumsql";
     export let columnData : IColumnUI 
     export let labels : boolean;
+    let selectDefault : HTMLSelectElement
     let widthConstraint = "max-w-xs w-screen"
     let widthDefault = "max-w-xs"
     function changeWidth()
@@ -16,6 +17,26 @@
         }else{
             widthConstraint = "max-w-xs w-screen"
             widthDefault = "max-w-xs"
+        }
+    }
+    function isCustomSelected() : boolean
+    {
+        return columnData.default.value == "Custom"
+    }
+    function changeDefault()
+    {
+        if(selectDefault.value == "Custom")
+        {
+            columnData.default.custom = true;
+            columnData.default.value = "";
+        }else{
+            columnData.default.custom = false;
+            if(selectDefault.value == "CURRENT_TIMESTAMP")
+            {
+                columnData.default.value = selectDefault.value;
+            }else{
+                columnData.default.value = "";
+            }
         }
     }
 </script>
@@ -48,24 +69,34 @@
             <option value="{columnTypes.CHAR}" class="option">{columnTypes.CHAR}</option>
           </select>
         
+          {#if columnData.type == columnTypes.VARCHAR}
+            
+                  <!-- svelte-ignore a11y-label-has-associated-control -->
+                  <label class="label">
+                      <span class="label-text">{labels ? "length" : ""}</span>
+                  </label>
+                  <input type="number" class="input input-bordered w-auto" bind:value={columnData.length} min="1" max="255">
+              
+          {/if}
     </div>
-    {#if columnData.type == columnTypes.VARCHAR}
-        <div>
-            <!-- svelte-ignore a11y-label-has-associated-control -->
-            <label class="label">
-                <span class="label-text">{labels ? "length" : ""}</span>
-            </label>
-            <input type="number" class="input input-bordered w-auto" bind:value={columnData.length} min="1" max="255">
-        </div>
-    {/if}
     <div>
         <!-- svelte-ignore a11y-label-has-associated-control -->
         
         <label class="label">
             <span class="label-text">{labels ? "default" : ""}</span>
         </label>
-        
-        <input type="text" placeholder="id" class="input input-bordered {widthDefault}" bind:value={columnData.default}/>
+        <select class="select select-bordered max-w-xs" bind:this={selectDefault} on:change={changeDefault}>
+            <option value="None" class="option">None</option>
+            <option value="Custom" class="option">Custom</option>
+            <option value="CURRENT_TIMESTAMP" class="option">CURRENT_TIMESTAMP</option>
+        </select>
+        {#if columnData.default.custom}
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label class="label">
+                <span class="label-text">Value</span>
+            </label>
+            <input type="text" placeholder="id" class="input input-bordered w-auto" bind:value={columnData.default.value}/>
+        {/if}
     </div>
     <div>
         <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -74,11 +105,14 @@
             <span class="label-text">{labels ? "constraint" : ""}</span>
         </label>
         <select class="select select-bordered {widthConstraint}" bind:value={columnData.constraint}>
-            <option value="{columnConstraints.PRIMARY_KEY}">{columnConstraints.PRIMARY_KEY}</option>
-            <option value="{columnConstraints.FOREIGN_KEY}">{columnConstraints.FOREIGN_KEY}</option>
-            <option value="{columnConstraints.NOT_NULL}">{columnConstraints.NOT_NULL}</option>
-            <option value="{columnConstraints.NULL}">{columnConstraints.NULL}</option>
-            <option value="{columnConstraints.UNIQUE}">{columnConstraints.UNIQUE}</option>
+            <option value="{columnConstraints.PRIMARY_KEY}" class="option">{columnConstraints.PRIMARY_KEY}</option>
+            <option value="{columnConstraints.PRIMARY_KEY_AI}" class="option">{columnConstraints.PRIMARY_KEY_AI}</option>
+            <option value="{columnConstraints.FOREIGN_KEY}" class="option">{columnConstraints.FOREIGN_KEY}</option>
+            <option value="{columnConstraints.NULL}" class="option">{columnConstraints.NULL}</option>
+            <option value="{columnConstraints.NOT_NULL}" class="option">{columnConstraints.NOT_NULL}</option>
+            
+           
+            <option value="{columnConstraints.UNIQUE}" class="option">{columnConstraints.UNIQUE}</option>
           </select>
         
     </div>

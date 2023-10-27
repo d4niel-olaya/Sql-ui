@@ -31,7 +31,7 @@
                 columnName:"",
                 type:"text",
                 constraint:"NULL",
-                default:"",
+                default:{custom:false, value:""},
                 length:""
             }
         ]
@@ -49,7 +49,7 @@
             columnName:"",
             type:"text",
             constraint : "NULL",
-            default : "",
+            default : {custom:false, value:""},
             length:""
         });
     }
@@ -62,7 +62,7 @@
 
     function createTable()
     {   
-        if(helperValidate.validateColunms(columns))
+        if(helperValidate.validateColunms(columns) || newTable.tableName.trim().length == 0)
         {
             showAlert = true
         }else{
@@ -108,7 +108,7 @@
                         <span class="label-text">Table name</span>
                     </label>
                     <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" bind:value={newTable.tableName}/>
-                    <div class="flex flex-wrap flex-row justify-evenly justify-items-center w-full">
+                    <div class="flex flex-wrap flex-row justify-evenly items-center w-full">
                         <!-- svelte-ignore empty-block -->
                         {#if columns.length > 0}
                             {#each columns as column, i}
