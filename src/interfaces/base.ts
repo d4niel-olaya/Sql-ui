@@ -28,5 +28,12 @@ export interface IDefault
     value:string
 }
 
+
+export interface IPk
+{
+    tableId :number
+    columnId:number
+}
+
  
 

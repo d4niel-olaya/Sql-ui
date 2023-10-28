@@ -1,4 +1,4 @@
-import type { ITable } from "../interfaces/base";
+import type { IPk, ITable } from "../interfaces/base";
 import { columnConstraints } from "../interfaces/enumsql";
 export class storageService
 {
@@ -47,21 +47,21 @@ export class storageService
         localStorage.setItem("tables", JSON.stringify(tables));
      }
 
-     getTablesWithPR():number[]
+     getTablesWithPR():IPk[]
      {
          let res = localStorage.getItem("tables-with-pr") || null
          if(res != null)
          {
-             let tables : number[] = JSON.parse(res)
+             let tables : IPk[] = JSON.parse(res)
              return tables
          }
-         let table : number[] = [] 
+         let table : IPk[] = [] 
          return table
      }
 
-     createTableWithPR(idTable: number):void{
-        let tables: number[] = this.getTablesWithPR();
-        tables.push(idTable);
+     createTableWithPR(idTable: number, idCol : number):void{
+        let tables: IPk[] = this.getTablesWithPR();
+        tables.push({tableId:idTable, columnId: idCol});
         localStorage.setItem("tables-with-pr", JSON.stringify(tables));
     }
 
@@ -72,9 +72,20 @@ export class storageService
         {
             if(colums[col].constraint.includes(columnConstraints.PRIMARY_KEY))
             {
-                this.createTableWithPR(table.id);
+                this.createTableWithPR(table.id, colums[col].id);
             }
         }
+    }
+
+
+    getNameAndColumn(id:number, idcol:number) : string
+    {
+        let t = this.getById(id);
+        console.log(idcol)
+        console.log(t.colums)
+        let cols = t.colums
+        let col = cols.filter(c => c.id == idcol)
+        return t.tableName + ' - ' + col[0].columnName
     }
 
 }

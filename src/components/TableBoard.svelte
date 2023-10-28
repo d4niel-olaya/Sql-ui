@@ -40,8 +40,8 @@
             $listTablesWithPr.forEach((index1) => {
                 $listTablesWithPr.forEach((index2) => {
                 if (index1 !== index2) {
-                    let table1 = service.getById(index1);
-                    let table2 = service.getById(index2);
+                    let table1 = service.getById(index1.tableId);
+                    let table2 = service.getById(index2.tableId);
                     h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
                     h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
                     const x1 =  table1.x + table1.w / 2 ;

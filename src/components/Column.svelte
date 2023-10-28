@@ -119,11 +119,11 @@
         {#if columnData.constraint == columnConstraints.FOREIGN_KEY}
             <!-- svelte-ignore a11y-label-has-associated-control -->
             <label class="label">
-                <span class="label-text">Table</span>
+                <span class="label-text">Select Primary key</span>
             </label>
             <select class="select select-bordered {widthConstraint}" bind:value={columnData.fk}>
             {#each  $listTablesWithPr as t }
-                <option value="{t}" class="option">{service.getById(t).tableName}</option>
+                <option value="{t.tableId}" class="option">{service.getNameAndColumn(t.tableId,t.columnId)}</option>
             {/each}
             </select>
         {/if}
