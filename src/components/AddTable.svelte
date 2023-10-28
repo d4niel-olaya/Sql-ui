@@ -33,7 +33,8 @@
                 constraint:"NULL",
                 default:{custom:false, value:""},
                 length:"",
-                fk:0
+                fk:0,
+                pk_fk:{columnFKId:0,columnNameFk:"",columnPKId:0,tableIdPK:0}
             }
         ]
         tables = service.get(); //getting tables from localstorage
@@ -52,7 +53,8 @@
             constraint : "NULL",
             default : {custom:false, value:""},
             length:"",
-            fk:0
+            fk:0,
+            pk_fk:{columnFKId:0,columnNameFk:"",columnPKId:0,tableIdPK:0}
         });
     }
 
@@ -71,6 +73,7 @@
             newTable.id = tables.length > 0 ? (tables[tables.length - 1].id + 1) : 1;
             newTable.y = $toogleContainer + 100
             newTable.colums = columns;
+            
             service.create(newTable);
             service.loopTableWithPr(newTable);
             listTables.set(service.get()); // updating state

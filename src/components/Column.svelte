@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { IColumnUI } from "../interfaces/base";
+    import type { IColumnUI, IPk } from "../interfaces/base";
     import { columnConstraints, columnTypes } from "../interfaces/enumsql";
     import { storageService } from "../services/storageService";
     import { listTablesWithPr } from "../services/list";
@@ -7,6 +7,7 @@
     export let labels : boolean;
     let service = new storageService();
     let selectDefault : HTMLSelectElement
+    let selectPK : HTMLSelectElement
     let widthConstraint = "max-w-xs w-screen"
     let widthDefault = "max-w-xs"
     let tablePk = 0;
@@ -42,6 +43,12 @@
                 columnData.default.value = "";
             }
         }
+    }
+
+    function onchangePk()
+    {
+        let t = service.getTablesWithPR().filter(tp => tp.tableId == columnData.fk)[0].columnId
+        columnData.pk_fk = {columnFKId : columnData.id, tableIdPK :columnData.fk , columnPKId : t, columnNameFk:columnData.columnName}
     }
 </script>
  
@@ -121,7 +128,7 @@
             <label class="label">
                 <span class="label-text">Select Primary key</span>
             </label>
-            <select class="select select-bordered {widthConstraint}" bind:value={columnData.fk}>
+            <select class="select select-bordered {widthConstraint}" bind:value={columnData.fk} on:change={onchangePk}>
             {#each  $listTablesWithPr as t }
                 <option value="{t.tableId}" class="option">{service.getNameAndColumn(t.tableId,t.columnId)}</option>
             {/each}

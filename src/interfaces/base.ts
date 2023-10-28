@@ -20,6 +20,8 @@ export interface IColumnUI
     default:IDefault
     constraint : string
     fk : number
+    pk_fk : IPK_FK 
+    
 }
 
 export interface IDefault
@@ -38,8 +40,10 @@ export interface IPk
 
 export interface IPK_FK
 {
-    colunmName:string
-    tableId : number
+    tableIdPK : number
+    columnPKId : number
+    columnFKId : number,
+    columnNameFk : string
 }
 
  
