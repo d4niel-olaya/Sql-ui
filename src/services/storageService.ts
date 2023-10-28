@@ -47,4 +47,16 @@ export class storageService
         localStorage.setItem("tables", JSON.stringify(tables));
      }
 
+     getTablesWithPR():number[]
+     {
+         let res = localStorage.getItem("tables-with-pr") || null
+         if(res != null)
+         {
+             let tables : number[] = JSON.parse(res)
+             return tables
+         }
+         let table : number[] = [] 
+         return table
+     }
+
 }
