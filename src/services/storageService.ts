@@ -1,5 +1,5 @@
 import type { ITable } from "../interfaces/base";
-
+import { columnConstraints } from "../interfaces/enumsql";
 export class storageService
 {
 
@@ -58,5 +58,23 @@ export class storageService
          let table : number[] = [] 
          return table
      }
+
+     createTableWithPR(idTable: number):void{
+        let tables: number[] = this.getTablesWithPR();
+        tables.push(idTable);
+        localStorage.setItem("tables-with-pr", JSON.stringify(tables));
+    }
+
+    loopTableWithPr(table : ITable)
+    {
+        let colums = table.colums
+        for(let col in colums)
+        {
+            if(colums[col].constraint.includes(columnConstraints.PRIMARY_KEY))
+            {
+                this.createTableWithPR(table.id);
+            }
+        }
+    }
 
 }

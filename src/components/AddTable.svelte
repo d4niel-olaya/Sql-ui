@@ -5,7 +5,7 @@
     import { toogleContainer} from "../services/board";
     import { helperValidate } from "../helpers/validateColumns";
     import Column from "./Column.svelte";
-    import { listTables } from "../services/list";
+    import { listTables,listTablesWithPr } from "../services/list";
     import { dimensionService } from "../services/dimensionService";
     let modal : HTMLDialogElement
     let service = new storageService();
@@ -70,7 +70,9 @@
             newTable.y = $toogleContainer + 100
             newTable.colums = columns;
             service.create(newTable);
+            service.loopTableWithPr(newTable);
             listTables.set(service.get()); // updating state
+            listTablesWithPr.set(service.getTablesWithPR()); // updating tables with PR Key
             newTable.tableName = "";
             modal.close();
             
