@@ -35,5 +35,12 @@ export interface IPk
     columnId:number
 }
 
+
+export interface IPK_FK
+{
+    colunmName:string
+    tableId : number
+}
+
  
 
