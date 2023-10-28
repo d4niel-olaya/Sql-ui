@@ -32,7 +32,8 @@
                 type:"text",
                 constraint:"NULL",
                 default:{custom:false, value:""},
-                length:""
+                length:"",
+                fk:0
             }
         ]
         tables = service.get(); //getting tables from localstorage
@@ -50,7 +51,8 @@
             type:"text",
             constraint : "NULL",
             default : {custom:false, value:""},
-            length:""
+            length:"",
+            fk:0
         });
     }
 

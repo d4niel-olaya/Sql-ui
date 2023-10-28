@@ -1,11 +1,15 @@
 <script lang="ts">
     import type { IColumnUI } from "../interfaces/base";
     import { columnConstraints, columnTypes } from "../interfaces/enumsql";
+    import { storageService } from "../services/storageService";
+    import { listTablesWithPr } from "../services/list";
     export let columnData : IColumnUI 
     export let labels : boolean;
+    let service = new storageService();
     let selectDefault : HTMLSelectElement
     let widthConstraint = "max-w-xs w-screen"
     let widthDefault = "max-w-xs"
+    let tablePk = 0;
     function changeWidth()
     {
         if(columnData.type == columnTypes.VARCHAR)
@@ -110,10 +114,18 @@
             <option value="{columnConstraints.FOREIGN_KEY}" class="option">{columnConstraints.FOREIGN_KEY}</option>
             <option value="{columnConstraints.NULL}" class="option">{columnConstraints.NULL}</option>
             <option value="{columnConstraints.NOT_NULL}" class="option">{columnConstraints.NOT_NULL}</option>
-            
-           
             <option value="{columnConstraints.UNIQUE}" class="option">{columnConstraints.UNIQUE}</option>
           </select>
-        
+        {#if columnData.constraint == columnConstraints.FOREIGN_KEY}
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label class="label">
+                <span class="label-text">Table</span>
+            </label>
+            <select class="select select-bordered {widthConstraint}" bind:value={columnData.fk}>
+            {#each  $listTablesWithPr as t }
+                <option value="{t}" class="option">{service.getById(t).tableName}</option>
+            {/each}
+            </select>
+        {/if}
     </div>
 

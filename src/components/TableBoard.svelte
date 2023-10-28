@@ -3,10 +3,11 @@
     import { writable } from "svelte/store";
     import Tablesql from "./Tablesql.svelte";
     import { storageService } from "../services/storageService";
-    import { listTables } from "../services/list";
+    import { listTables, listTablesWithPr } from "../services/list";
     import { boardLeft,toogleContainer,mainContainer} from "../services/board";
     import { dimensionService } from "../services/dimensionService";
     import { onMount } from "svelte";
+    let service = new storageService()
     let toogle : HTMLDivElement
     let divContainer : HTMLDivElement
     let canvas : HTMLCanvasElement
@@ -36,9 +37,11 @@
                // ctx?.fillStyle = table.isDragging ? 'red' : 'blue';
                 ctx?.fillRect(table.x, h, table.w, table.h);
             });*/
-            $listTables.forEach((table1, index1) => {
-                $listTables.forEach((table2, index2) => {
+            $listTablesWithPr.forEach((index1) => {
+                $listTablesWithPr.forEach((index2) => {
                 if (index1 !== index2) {
+                    let table1 = service.getById(index1);
+                    let table2 = service.getById(index2);
                     h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
                     h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
                     const x1 =  table1.x + table1.w / 2 ;

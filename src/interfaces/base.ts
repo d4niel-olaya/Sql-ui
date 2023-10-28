@@ -19,6 +19,7 @@ export interface IColumnUI
     length:string;
     default:IDefault
     constraint : string
+    fk : number
 }
 
 export interface IDefault
@@ -26,5 +27,6 @@ export interface IDefault
     custom:boolean
     value:string
 }
-         
+
+ 
 
