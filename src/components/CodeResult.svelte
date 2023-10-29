@@ -11,7 +11,8 @@
 <div class="w-6/12 max-h-screen">
    <div class="mt-2 mr-2 ml-2 mb-2 overflow-y-auto h-56 p-2 max-h-56 focus:outline-none" id="board">
          <div class="mockup-code h-full overflow-y-auto bg-slate-700 focus:outline-none" contenteditable="true">
-            {@html $script}
+               {@html $script}
+       
          </div>
    
    </div>
