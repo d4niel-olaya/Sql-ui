@@ -64,7 +64,9 @@ export class scriptProvider{
     {
         let sql : string[] = [];
         let separator : string;
+       
         sql.push("CREATE TABLE "+ table.tableName + " (");
+        
         for(let i = 0; i < table.colums.length ; i++)
         {
             if(table.colums.length == 1  ||  i == (table.colums.length-1))
@@ -98,6 +100,6 @@ export class scriptProvider{
             }
         }
         sql.push("); \n")
-        return sql.join("");
+        return sql.join("").replace(/\s/g," ");
     }
 }
