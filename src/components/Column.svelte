@@ -47,8 +47,17 @@
 
     function onchangePk()
     {
-        let t = service.getTablesWithPR().filter(tp => tp.tableId == columnData.fk)[0].columnId
-        columnData.pk_fk = {columnFKId : columnData.id, tableIdPK :columnData.fk , columnPKId : t, columnNameFk:columnData.columnName}
+
+        columnData.fk = parseInt(selectPK.value)
+        let t = service.getTablesWithPR().filter(tp => tp.tableId == columnData.fk)
+        columnData.pk_fk = {columnFKId : columnData.id, tableIdPK :columnData.fk , columnPKId : t[0].columnId, columnNameFk:columnData.columnName}
+        columnData.type = t[0].columnType
+        console.log(columnData.type)
+    }
+
+    function load()
+    {
+        alert("a")
     }
 </script>
  
@@ -128,7 +137,7 @@
             <label class="label">
                 <span class="label-text">Select Primary key</span>
             </label>
-            <select class="select select-bordered {widthConstraint}" bind:value={columnData.fk} on:change={onchangePk}>
+            <select class="select select-bordered {widthConstraint}" bind:this={selectPK} on:change={onchangePk} on:focus={onchangePk}>
             {#each  $listTablesWithPr as t , index}
                 {#if index == 0}
                     <option value="{t.tableId}" class="option" selected>{service.getNameAndColumn(t.tableId,t.columnId)}</option>

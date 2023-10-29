@@ -35,6 +35,7 @@ export interface IPk
 {
     tableId :number
     columnId:number
+    columnType :string
 }
 
 
@@ -44,6 +45,14 @@ export interface IPK_FK
     columnPKId : number
     columnFKId : number,
     columnNameFk : string
+}
+
+
+
+export interface ITablePK_FK
+{
+    tableIdPK:number
+    tablerIdFk:number
 }
 
  

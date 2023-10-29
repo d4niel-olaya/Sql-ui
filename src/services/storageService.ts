@@ -1,4 +1,4 @@
-import type { IPk, ITable } from "../interfaces/base";
+import type { IPk, ITable, ITablePK_FK } from "../interfaces/base";
 import { columnConstraints } from "../interfaces/enumsql";
 export class storageService
 {
@@ -59,9 +59,9 @@ export class storageService
          return table
      }
 
-     createTableWithPR(idTable: number, idCol : number):void{
+     createTableWithPR(idTable: number, idCol : number, colType : string):void{
         let tables: IPk[] = this.getTablesWithPR();
-        tables.push({tableId:idTable, columnId: idCol});
+        tables.push({tableId:idTable, columnId: idCol, columnType:colType});
         localStorage.setItem("tables-with-pr", JSON.stringify(tables));
     }
 
@@ -72,7 +72,7 @@ export class storageService
         {
             if(colums[col].constraint.includes(columnConstraints.PRIMARY_KEY))
             {
-                this.createTableWithPR(table.id, colums[col].id);
+                this.createTableWithPR(table.id, colums[col].id,colums[col].type);
             }
         }
     }
@@ -86,6 +86,26 @@ export class storageService
         let cols = t.colums
         let col = cols.filter(c => c.id == idcol)
         return t.tableName + ' - ' + col[0].columnName
+    }
+
+    getTablesWithPRandFK():ITablePK_FK[]
+     {
+         let res = localStorage.getItem("tables-with-pr-and-fk") || null
+         if(res != null)
+         {
+             let tables : ITablePK_FK[] = JSON.parse(res)
+             return tables
+         }
+         let table : ITablePK_FK[] = [] 
+         return table
+     }
+
+
+
+     createTableWithPRandFk(idTablePR: number, idTableFk: number):void{
+        let tables: ITablePK_FK[] = this.getTablesWithPRandFK();
+        tables.push({tablerIdFk:idTableFk, tableIdPK:idTablePR});
+        localStorage.setItem("tables-with-pr-and-fk", JSON.stringify(tables));
     }
 
 }
