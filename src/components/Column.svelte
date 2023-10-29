@@ -129,8 +129,12 @@
                 <span class="label-text">Select Primary key</span>
             </label>
             <select class="select select-bordered {widthConstraint}" bind:value={columnData.fk} on:change={onchangePk}>
-            {#each  $listTablesWithPr as t }
-                <option value="{t.tableId}" class="option">{service.getNameAndColumn(t.tableId,t.columnId)}</option>
+            {#each  $listTablesWithPr as t , index}
+                {#if index == 0}
+                    <option value="{t.tableId}" class="option" selected>{service.getNameAndColumn(t.tableId,t.columnId)}</option>
+                {:else}
+                    <option value="{t.tableId}" class="option">{service.getNameAndColumn(t.tableId,t.columnId)}</option>
+                {/if}
             {/each}
             </select>
         {/if}
