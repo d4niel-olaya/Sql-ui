@@ -12,6 +12,7 @@ export class scriptProvider{
     iterateTables() : string[]
     {
         const result = this.tables.map((t) => this.generateBaseSql(t));
+        console.log(result)
         //console.log(result.join("").split(","))
         return result.join("").split(",");
     }
@@ -56,7 +57,7 @@ export class scriptProvider{
         let tPK = service.getById(t.tableIdPK)
         let tPkName = tPK.tableName
         let tPkCol = tPK.colums.filter(c => c.id == t.columnPKId)
-        let sqlConstraint = `FOREING KEY(${t.columnNameFk}) REFERENCES ${tPkName}(${tPkCol[0].columnName})`
+        let sqlConstraint = `<pre data-prefix=">"><code><span class="text-info">,  FOREING KEY</span>(${t.columnNameFk}) <span class="text-info">REFERENCES</span> ${tPkName}(${tPkCol[0].columnName})</code></pre>`
         return sqlConstraint
     }
 
@@ -65,7 +66,7 @@ export class scriptProvider{
         let sql : string[] = [];
         let separator : string;
        
-        sql.push("CREATE TABLE "+ table.tableName + " (");
+        sql.push(`<pre data-prefix=">"><code><span class="text-info">CREATE TABLE</span> ${table.tableName} (</code></pre>`);
         
         for(let i = 0; i < table.colums.length ; i++)
         {
@@ -78,10 +79,10 @@ export class scriptProvider{
             let defaultvalue = table.colums[i].default.value.trim().length  != 0 ? `DEFAULT ${table.colums[i].default.value}` : "";
             if(table.colums[i].constraint == columnConstraints.FOREIGN_KEY)
             {
-                sql.push(`${table.colums[i].columnName} ${table.colums[i].type} ${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue}${separator}`)
+                sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type} ${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue}${separator}</code></pre>`)
             }
             else{
-                sql.push(`${table.colums[i].columnName} ${table.colums[i].type}${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue} ${table.colums[i].constraint}${separator}`)
+                sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type}${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue} <span class="text-info">${table.colums[i].constraint}</span>${separator}</code></pre>`)
             }
             console.log(sql.join(""))
         }   
@@ -96,10 +97,11 @@ export class scriptProvider{
             }
             if(table.colums[i].pk_fk.tableIdPK != 0)
             {
-                sql.push(","+this.getRelation(table.colums[i].pk_fk))
+                sql.push(`${this.getRelation(table.colums[i].pk_fk)}`)
             }
         }
-        sql.push("); \n")
+        sql.push(`<pre data-prefix=">"><code> );</code></pre> `)
+        console.log(sql)
         return sql.join("").replace(/\s/g," ");
     }
 }
