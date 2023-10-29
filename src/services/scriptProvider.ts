@@ -35,7 +35,7 @@ export class scriptProvider{
             let tNormalConstraint = ""
             if(table.colums[i].constraint == columnConstraints.FOREIGN_KEY) // validating fk constraint
             {
-                tConstraint = this.getRelation(table.colums[i].pk_fk)
+                tConstraint = this.getRelation(table.colums[i].pk_fk,separator)
             }else{
                 tNormalConstraint = table.colums[i].constraint
             }
@@ -51,13 +51,13 @@ export class scriptProvider{
     }
 
 
-    getRelation(t : IPK_FK) : string
+    getRelation(t : IPK_FK, separator : string) : string
     {
         let service = new storageService();
         let tPK = service.getById(t.tableIdPK)
         let tPkName = tPK.tableName
         let tPkCol = tPK.colums.filter(c => c.id == t.columnPKId)
-        let sqlConstraint = `<pre data-prefix=">"><code><span class="text-info">,  FOREING KEY</span>(${t.columnNameFk}) <span class="text-info">REFERENCES</span> ${tPkName}(${tPkCol[0].columnName})</code></pre>`
+        let sqlConstraint = `<pre data-prefix=">"><code><span class="text-info"> FOREING KEY</span>(${t.columnNameFk}) <span class="text-info">REFERENCES</span> ${tPkName}(${tPkCol[0].columnName})${separator}</code></pre>`
         return sqlConstraint
     }
 
@@ -67,12 +67,17 @@ export class scriptProvider{
         let separator : string;
        
         sql.push(`<pre data-prefix=">"><code><span class="text-info">CREATE TABLE</span> ${table.tableName} (</code></pre>`);
-        
+        let colsFK = table.colums.filter(c => c.constraint == columnConstraints.FOREIGN_KEY)
         for(let i = 0; i < table.colums.length ; i++)
         {
             if(table.colums.length == 1  ||  i == (table.colums.length-1))
             {
                 separator = ""
+                
+                if(colsFK.length !=0)
+                {
+                    separator = ','
+                }
             }else{
                 separator = ","
             }
@@ -87,18 +92,16 @@ export class scriptProvider{
             console.log(sql.join(""))
         }   
 
-        for(let i = 0; i < table.colums.length ; i++)
+        for(let i = 0; i < colsFK.length ; i++)
         {
-            if(table.colums.length == 1  ||  i == (table.colums.length-1))
+            if(colsFK.length == 1  ||  i == (colsFK.length-1))
             {
                 separator = ""
             }else{
                 separator = ","
             }
-            if(table.colums[i].pk_fk.tableIdPK != 0)
-            {
-                sql.push(`${this.getRelation(table.colums[i].pk_fk)}`)
-            }
+            sql.push(`${this.getRelation(colsFK[i].pk_fk,separator)}`)
+            
         }
         sql.push(`<pre data-prefix=">"><code> );</code></pre> `)
         console.log(sql)
