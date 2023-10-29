@@ -108,4 +108,16 @@ export class storageService
         localStorage.setItem("tables-with-pr-and-fk", JSON.stringify(tables));
     }
 
+    loopTableWithPrAndFk(table : ITable)
+    {
+        let colums = table.colums
+        for(let col in colums)
+        {
+            if(colums[col].constraint == columnConstraints.FOREIGN_KEY)
+            {
+                this.createTableWithPRandFk(colums[col].pk_fk.tableIdPK,table.id)
+            }
+        }
+    }
+
 }

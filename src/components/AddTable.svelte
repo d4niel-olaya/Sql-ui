@@ -5,7 +5,7 @@
     import { toogleContainer} from "../services/board";
     import { helperValidate } from "../helpers/validateColumns";
     import Column from "./Column.svelte";
-    import { listTables,listTablesWithPr } from "../services/list";
+    import { listTables,listTablesWithPr,listTablesWithRelation } from "../services/list";
     import { dimensionService } from "../services/dimensionService";
     let modal : HTMLDialogElement
     let service = new storageService();
@@ -73,11 +73,12 @@
             newTable.id = tables.length > 0 ? (tables[tables.length - 1].id + 1) : 1;
             newTable.y = $toogleContainer + 100
             newTable.colums = columns;
-            
             service.create(newTable);
             service.loopTableWithPr(newTable);
+            service.loopTableWithPrAndFk(newTable)
             listTables.set(service.get()); // updating state
             listTablesWithPr.set(service.getTablesWithPR()); // updating tables with PR Key
+            listTablesWithRelation.set(service.getTablesWithPRandFK()); // tables with sql relationship
             newTable.tableName = "";
             modal.close();
             

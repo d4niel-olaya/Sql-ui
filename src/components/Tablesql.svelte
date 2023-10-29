@@ -5,7 +5,7 @@
     import { storageService } from "../services/storageService";
     import { boardLeft,boardTop } from "../services/board";
     import { onMount } from "svelte";
-    import { listTables } from "../services/list";
+    import { listTables, listTablesWithRelation } from "../services/list";
     import { mainContainer } from "../services/board";
     export let model : ITable
     export let canvas : HTMLCanvasElement
@@ -113,9 +113,10 @@
       if(ctx != null)
       {
         ctx.strokeStyle = "#94a3b8"
-        $listTables.forEach((table1, index1) => {
-              $listTables.forEach((table2, index2) => {
-              if (index1 !== index2) {
+        $listTablesWithRelation.forEach((tablePK, index1) => {
+          
+                  let table1 = service.getById(tablePK.tableIdPK);
+                  let table2 = service.getById(tablePK.tablerIdFk);
                   h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
                   h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
                   const x1 =  table1.x + table1.w / 2 ;
@@ -131,8 +132,7 @@
                   ctx?.moveTo(x1, y1);
                   ctx?.lineTo(x2, y2);
                   ctx?.stroke();
-              }
-              });
+             
         });
       }
     }
