@@ -42,11 +42,11 @@
                     let table2 = service.getById(index1.tablerIdFk);
                     h = table1.y > ($mainContainer+table1.h) ? table1.y - ($mainContainer+table1.h)  : ($mainContainer+table1.h) - table1.y
                     h2 = table2.y > ($mainContainer+table2.h) ? table2.y - ($mainContainer+table2.h)  : ($mainContainer+table2.h) - table2.y
-                    const x1 =  table1.x + table1.w / 2 ;
+                    const x1 =  table1.x + table1.w / 2  ;
                     
-                    const y1 = h + table1.h / 2;
-                    const x2 = table2.x + table2.w  / 2;
-                    const y2 = h2 + table2.h / 2 ;
+                    const y1 = h + table1.h;
+                    const x2 = table2.x + table2.w / 2;
+                    const y2 = h2 + table2.h  ;
                     console.log(x1,y1,x2,y2, "coords")
                     console.log(table1.x,table1.y)
                     

@@ -69,7 +69,7 @@
             <span class="label-text">{labels == true ? "colunm name" : ""}</span>
         </label>
         
-        <input type="text" placeholder="id" class="input input-bordered max-w-xs" bind:value={columnData.columnName} minlength="1" required/>
+        <input type="text" placeholder="id" class="input input-bordered max-w-xs focus:input-primary" bind:value={columnData.columnName} minlength="1" required/>
     </div>
     <div>
         <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -77,7 +77,7 @@
         <label class="label">
             <span class="label-text">{labels ? "type" : ""}</span>
         </label>
-        <select class="select select-bordered max-w-xs" bind:value={columnData.type} on:change={changeWidth}>
+        <select class="select select-bordered max-w-xs focus:select-primary" bind:value={columnData.type} on:change={changeWidth}>
             <option value="{columnTypes.INT}" class="option">{columnTypes.INT}</option>
             <option value="{columnTypes.BIGINT}" class="option">{columnTypes.BIGINT}</option>
             <option value="{columnTypes.VARCHAR}" class="option">{columnTypes.VARCHAR}</option>
@@ -95,7 +95,7 @@
                   <label class="label">
                       <span class="label-text">{labels ? "length" : ""}</span>
                   </label>
-                  <input type="number" class="input input-bordered w-auto" bind:value={columnData.length} min="1" max="255">
+                  <input type="number" class="input input-bordered w-auto focus:input-primary" bind:value={columnData.length} min="1" max="255">
               
           {/if}
     </div>
@@ -105,7 +105,7 @@
         <label class="label">
             <span class="label-text">{labels ? "default" : ""}</span>
         </label>
-        <select class="select select-bordered max-w-xs" bind:this={selectDefault} on:change={changeDefault}>
+        <select class="select select-bordered max-w-xs focus:select-primary" bind:this={selectDefault} on:change={changeDefault}>
             <option value="None" class="option">None</option>
             <option value="Custom" class="option">Custom</option>
             <option value="CURRENT_TIMESTAMP" class="option">CURRENT_TIMESTAMP</option>
@@ -115,7 +115,7 @@
             <label class="label">
                 <span class="label-text">Value</span>
             </label>
-            <input type="text" placeholder="id" class="input input-bordered w-auto" bind:value={columnData.default.value}/>
+            <input type="text" placeholder="id" class="input input-bordered w-auto focus:input-primary" bind:value={columnData.default.value}/>
         {/if}
     </div>
     <div>
@@ -124,7 +124,7 @@
         <label class="label">
             <span class="label-text">{labels ? "constraint" : ""}</span>
         </label>
-        <select class="select select-bordered {widthConstraint}" bind:value={columnData.constraint}>
+        <select class="select select-bordered {widthConstraint} focus:select-primary" bind:value={columnData.constraint}>
             <option value="{columnConstraints.PRIMARY_KEY}" class="option">{columnConstraints.PRIMARY_KEY}</option>
             <option value="{columnConstraints.PRIMARY_KEY_AI}" class="option">{columnConstraints.PRIMARY_KEY_AI}</option>
             <option value="{columnConstraints.FOREIGN_KEY}" class="option">{columnConstraints.FOREIGN_KEY}</option>
@@ -137,7 +137,7 @@
             <label class="label">
                 <span class="label-text">Select Primary key</span>
             </label>
-            <select class="select select-bordered {widthConstraint}" bind:this={selectPK} on:change={onchangePk} on:focus={onchangePk}>
+            <select class="select select-bordered {widthConstraint} focus:select-primary" bind:this={selectPK} on:change={onchangePk} on:focus={onchangePk}>
             {#each  $listTablesWithPr as t , index}
                 {#if index == 0}
                     <option value="{t.tableId}" class="option" selected>{service.getNameAndColumn(t.tableId,t.columnId)}</option>

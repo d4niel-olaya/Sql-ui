@@ -10,6 +10,7 @@
     import { dimensionService } from "../services/dimensionService";
     import { mainContainer } from "../services/board";
     import { onMount } from "svelte";
+    import CopyToClipboard from "../components/CopyToClipboard.svelte";
     let maincontainer: HTMLDivElement
   onMount(()=>
     {
@@ -20,7 +21,6 @@
   )
   
 </script>
-   <Logo/>
   <div class="flex flex-wrap justify-around mt-5 w-screen" bind:this={maincontainer}>
     <CodeResult/>
     <div class="flex flex-col items-center">

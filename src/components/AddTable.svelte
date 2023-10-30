@@ -115,7 +115,7 @@
                     <label class="label">
                         <span class="label-text">Table name</span>
                     </label>
-                    <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs" bind:value={newTable.tableName}/>
+                    <input type="text" placeholder="MyTable" class="input input-bordered w-full max-w-xs focus:input-primary" bind:value={newTable.tableName}/>
                     <div class="flex flex-wrap flex-row justify-evenly items-center w-full">
                         <!-- svelte-ignore empty-block -->
                         {#if columns.length > 0}
