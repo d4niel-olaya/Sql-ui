@@ -4,9 +4,10 @@
     import type { IColumnUI, ITable } from "../interfaces/base";
     import { storageService } from "../services/storageService";
     import { boardLeft,boardTop } from "../services/board";
-    import { onMount } from "svelte";
+    import { afterUpdate, beforeUpdate, onMount } from "svelte";
     import { listTables, listTablesWithRelation } from "../services/list";
     import { mainContainer } from "../services/board";
+    import { details, detailsManager } from "../services/tableDetails";
     export let model : ITable
     export let canvas : HTMLCanvasElement
     let tableStorage : ITable
@@ -138,13 +139,15 @@
     }
 
 
-    onMount(()=>
+    onMount(async ()=>
     {
       div.style.left = model.x  + "px";
       div.style.top = model.y + "px";
       service.updateDimensions(model.id,div.getBoundingClientRect().width,div.getBoundingClientRect().height) // Updating table dimensions
       listTables.set(service.get());
     });
+
+  
     
 
 
@@ -157,11 +160,27 @@
 <div class="absolute cursor-grab card w-72 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
 bind:this={div}
 on:mousedown|stopPropagation={d}
-
 >
+  {#if $details}
+    <div class="overflow-x-auto">
+      <div class="grid grid-rows-3 grid-flow-col gap-4">
+        <div>
+          {model.colums[0].columnName}
+        </div>
+        <div>
+          col2
+        </div>
+        <div>
+          col3 
+        </div>
+      </div>
+    </div>
+    {:else}
     <div class="card-body">
       <h2 class="card-title">{model.tableName}</h2>
     </div>
+  {/if}
+
 </div>
 
 <dialog id="my_modal_1" class="modal" bind:this={modal}>

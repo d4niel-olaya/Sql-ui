@@ -7,6 +7,7 @@
     import { boardLeft,toogleContainer,mainContainer} from "../services/board";
     import { dimensionService } from "../services/dimensionService";
     import { onMount } from "svelte";
+    import { details } from "../services/tableDetails";
     let service = new storageService()
     let toogle : HTMLDivElement
     let divContainer : HTMLDivElement
@@ -115,8 +116,8 @@
       </canvas>
     <div class="absolute form-control w-44" bind:this={toogle}>
         <label class="cursor-pointer label">
-            <input type="checkbox" class="toggle toggle-primary" checked disabled/>
-            <span class="label-text">Show table details</span> 
+            <input type="checkbox" class="toggle toggle-primary" on:click={() => details.set(!$details)}/>
+            <span class="label-text">Show table details {$details}</span> 
         </label>
       </div>
     {#if $listTables.length > 0}
