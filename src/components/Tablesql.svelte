@@ -8,12 +8,14 @@
     import { listTables, listTablesWithRelation } from "../services/list";
     import { mainContainer } from "../services/board";
     import { details, detailsManager } from "../services/tableDetails";
+    import { columnConstraints } from "../interfaces/enumsql";
     export let model : ITable
     export let canvas : HTMLCanvasElement
     let tableStorage : ITable
     let service = new storageService();
     let modal : HTMLDialogElement
     let div : HTMLDivElement
+    let cols : IColumnUI[]
     let x :number = 0;
     let y : number = 0;
     let isDragging = false;
@@ -138,9 +140,16 @@
       }
     }
 
+    function generateRow(row : IColumnUI)
+    {
+      let pk = row.constraint.includes(columnConstraints.PRIMARY_KEY) ? "PK|" : ""
+      return `${pk}${row.columnName}|${row.constraint}` 
+    }
+
 
     onMount(async ()=>
     {
+      cols = model.colums
       div.style.left = model.x  + "px";
       div.style.top = model.y + "px";
       service.updateDimensions(model.id,div.getBoundingClientRect().width,div.getBoundingClientRect().height) // Updating table dimensions
@@ -163,16 +172,12 @@ on:mousedown|stopPropagation={d}
 >
   {#if $details}
     <div class="overflow-x-auto">
-      <div class="grid grid-rows-3 grid-flow-col gap-4">
-        <div>
-          {model.colums[0].columnName}
-        </div>
-        <div>
-          col2
-        </div>
-        <div>
-          col3 
-        </div>
+      <div>
+        {#each cols as c}
+        <div class="text-center card">
+            <div class="p-2">{generateRow(c)}</div>
+        </div> 
+        {/each}
       </div>
     </div>
     {:else}
