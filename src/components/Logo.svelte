@@ -6,7 +6,7 @@
     <div class="flex-1">
         
         
-            <a class="btn btn-ghost font-mono text-xl">SqlUI</a>
+            <a class="btn btn-ghost font-mono text-xl">Sql-UI</a>
             <p class="pl-4"><code>Quick SQL Table Definitions</code></p>
         
     </div>
