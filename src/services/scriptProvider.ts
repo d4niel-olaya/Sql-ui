@@ -57,7 +57,7 @@ export class scriptProvider{
         let tPK = service.getById(t.tableIdPK)
         let tPkName = tPK.tableName
         let tPkCol = tPK.colums.filter(c => c.id == t.columnPKId)
-        let sqlConstraint = `<pre data-prefix=">"><code><span class="text-info"> FOREING KEY</span>(${t.columnNameFk}) <span class="text-info">REFERENCES</span> ${tPkName}(${tPkCol[0].columnName})${separator}</code></pre>`
+        let sqlConstraint = `<pre data-prefix=">"><code><span class="text-violet-500"> FOREING KEY</span>(${t.columnNameFk}) <span class="text-violet-500">REFERENCES</span> ${tPkName}(${tPkCol[0].columnName})${separator}</code></pre>`
         return sqlConstraint
     }
 
@@ -66,7 +66,7 @@ export class scriptProvider{
         let sql : string[] = [];
         let separator : string;
        
-        sql.push(`<pre data-prefix=">"><code><span class="text-info">CREATE TABLE</span> ${table.tableName} (</code></pre>`);
+        sql.push(`<pre data-prefix=">"><code><span class="text-violet-500">CREATE TABLE</span> ${table.tableName} (</code></pre>`);
         let colsFK = table.colums.filter(c => c.constraint == columnConstraints.FOREIGN_KEY)
         for(let i = 0; i < table.colums.length ; i++)
         {
@@ -87,7 +87,7 @@ export class scriptProvider{
                 sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type} ${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue}${separator}</code></pre>`)
             }
             else{
-                sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type}${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue} <span class="text-info">${table.colums[i].constraint}</span>${separator}</code></pre>`)
+                sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type}${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue} <span class="text-violet-500">${table.colums[i].constraint}</span>${separator}</code></pre>`)
             }
             console.log(sql.join(""))
         }   
