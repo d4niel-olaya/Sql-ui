@@ -16,10 +16,11 @@
     let service = new storageService();
     let modal : HTMLDialogElement
     let div : HTMLDivElement
-    let cols : IColumnUI[]
+    let cols : IColumnUI[] = []
     let x :number = 0;
     let y : number = 0;
     let isDragging = false;
+    let hidden : string
     
     function Open()
     {
@@ -146,7 +147,7 @@
       let pk = ""
       let defaultvalue = row.default.value.trim().length  != 0 ? `DEFAULT ${row.default.value}` : "";
     
-        pk = `<pre data-prefix=">"><code>  ${row.columnName} ${row.type}${row.length != "" ? "("+row.length+")" : ""} ${defaultvalue}</code></pre>`
+        pk = `<pre><code>  ${row.columnName} ${row.type}${row.length != "" ? "("+row.length+")" : ""} ${defaultvalue}</code></pre>`
             
       return pk 
     }
@@ -155,6 +156,7 @@
     onMount(async ()=>
     {
       cols = model.colums
+      hidden = $details ? "hidden" :""
       div.style.left = model.x  + "px";
       div.style.top = model.y + "px";
       service.updateDimensions(model.id,div.getBoundingClientRect().width,div.getBoundingClientRect().height) // Updating table dimensions
@@ -182,10 +184,12 @@ on:mousedown|stopPropagation={d}
         <div class="text-center col-span-2 border-b border-slate-700 p-2">
           <p class="font-medium text-lg text-slate-200">{model.tableName}</p>
           </div>  
-          {#each cols as c}  
-                  <div class="p-2 text-slate-300">{c.columnName}</div>
-                  <div class="p-2 text-slate-300">{c.type}</div>
-          {/each}
+          {#if cols.length != 0}
+            {#each cols as c}  
+                    <div class="p-2 text-slate-300">{c.columnName}</div>
+                    <div class="p-2 text-slate-300">{c.type}</div>
+            {/each}
+          {/if}
         </div>
   </div>
     {:else}

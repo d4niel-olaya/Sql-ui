@@ -116,7 +116,7 @@
       </canvas>
     <div class="absolute form-control w-44" bind:this={toogle}>
         <label class="cursor-pointer label">
-            <input type="checkbox" class="toggle toggle-primary" on:click={() => details.set(!$details)}/>
+            <input type="checkbox" class="toggle toggle-primary" checked on:click={() => details.set(!$details)}/>
             <span class="label-text">Show table details</span> 
         </label>
       </div>
