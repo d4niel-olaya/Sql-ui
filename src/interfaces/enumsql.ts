@@ -21,5 +21,5 @@ export enum columnConstraints
     UNIQUE = 'UNIQUE',
     PRIMARY_KEY = 'PRIMARY KEY',
     PRIMARY_KEY_AI = "PRIMARY KEY AUTO_INCREMENT",
-    FOREIGN_KEY = 'FOREIGN KEY',
+    FOREIGN_KEY = 'FOREING KEY',
 }
