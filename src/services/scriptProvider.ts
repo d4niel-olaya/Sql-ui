@@ -81,7 +81,16 @@ export class scriptProvider{
             }else{
                 separator = ","
             }
-            let defaultvalue = table.colums[i].default.value.trim().length  != 0 ? `DEFAULT ${table.colums[i].default.value}` : "";
+            let defaultvalue : string = ""
+            if(table.colums[i].default.value.trim().length  != 0)
+            {
+                defaultvalue = `DEFAULT ${table.colums[i].default.value}`
+            }
+            else if(table.colums[i].default.value == columnConstraints.NULL)
+            {
+               defaultvalue = `${table.colums[i].default.value}`
+            }
+
             if(table.colums[i].constraint == columnConstraints.FOREIGN_KEY)
             {
                 sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type} ${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue}${separator}</code></pre>`)

@@ -11,6 +11,7 @@
     let widthConstraint = "max-w-xs w-screen"
     let widthDefault = "max-w-xs"
     let tablePk = 0;
+    let hidden : string
     function changeWidth()
     {
         if(columnData.type == columnTypes.VARCHAR)
@@ -36,12 +37,20 @@
             columnData.default.value = "";
         }else{
             columnData.default.custom = false;
-            if(selectDefault.value == "CURRENT_TIMESTAMP")
+            if(selectDefault.value == "CURRENT_TIMESTAMP" || selectDefault.value == columnConstraints.NULL)
             {
                 columnData.default.value = selectDefault.value;
             }else{
                 columnData.default.value = "";
             }
+        }
+
+        if(selectDefault.value == columnConstraints.NULL)
+        {
+            hidden = "hidden"
+        }
+        else{
+            hidden = ""
         }
     }
 
@@ -108,6 +117,7 @@
         <select class="select select-bordered max-w-xs focus:select-primary" bind:this={selectDefault} on:change={changeDefault}>
             <option value="None" class="option">None</option>
             <option value="Custom" class="option">Custom</option>
+            <option value="{columnConstraints.NULL}" class="option">{columnConstraints.NULL}</option>
             <option value="CURRENT_TIMESTAMP" class="option">CURRENT_TIMESTAMP</option>
         </select>
         {#if columnData.default.custom}
@@ -125,11 +135,11 @@
             <span class="label-text">{labels ? "constraint" : ""}</span>
         </label>
         <select class="select select-bordered {widthConstraint} focus:select-primary" bind:value={columnData.constraint}>
+            <option value="" class="option">None</option>
             <option value="{columnConstraints.PRIMARY_KEY}" class="option">{columnConstraints.PRIMARY_KEY}</option>
             <option value="{columnConstraints.PRIMARY_KEY_AI}" class="option">{columnConstraints.PRIMARY_KEY_AI}</option>
             <option value="{columnConstraints.FOREIGN_KEY}" class="option">{columnConstraints.FOREIGN_KEY}</option>
-            <option value="{columnConstraints.NULL}" class="option">{columnConstraints.NULL}</option>
-            <option value="{columnConstraints.NOT_NULL}" class="option">{columnConstraints.NOT_NULL}</option>
+            <option value="{columnConstraints.NOT_NULL}" class="option {hidden}">{columnConstraints.NOT_NULL}</option>
             <option value="{columnConstraints.UNIQUE}" class="option">{columnConstraints.UNIQUE}</option>
           </select>
         {#if columnData.constraint == columnConstraints.FOREIGN_KEY}

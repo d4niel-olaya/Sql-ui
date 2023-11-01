@@ -10,7 +10,7 @@ export class helperValidate
             {
                 return (
                     this.isEmpty(col.columnName) ||
-                    this.isEmpty(col.constraint) ||
+                   // this.isEmpty(col.constraint) ||
                     this.isEmpty(col.type) 
 
                 )
