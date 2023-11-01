@@ -12,7 +12,6 @@ export class scriptProvider{
     iterateTables() : string[]
     {
         const result = this.tables.map((t) => this.generateBaseSql(t));
-        console.log(result)
         //console.log(result.join("").split(","))
         return result.join("").split(",");
     }
@@ -98,7 +97,6 @@ export class scriptProvider{
             else{
                 sql.push(`<pre data-prefix=">"><code>  ${table.colums[i].columnName} ${table.colums[i].type}${table.colums[i].length != "" ? "("+table.colums[i].length+")" : ""} ${defaultvalue} <span class="text-violet-500">${table.colums[i].constraint}</span>${separator}</code></pre>`)
             }
-            console.log(sql.join(""))
         }   
 
         for(let i = 0; i < colsFK.length ; i++)
@@ -113,7 +111,6 @@ export class scriptProvider{
             
         }
         sql.push(`<pre data-prefix=">"><code> );</code></pre> `)
-        console.log(sql)
         return sql.join("").replace(/\s/g," ");
     }
 }

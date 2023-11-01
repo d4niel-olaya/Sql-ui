@@ -81,8 +81,6 @@ export class storageService
     getNameAndColumn(id:number, idcol:number) : string
     {
         let t = this.getById(id);
-        console.log(idcol)
-        console.log(t.colums)
         let cols = t.colums
         let col = cols.filter(c => c.id == idcol)
         return t.tableName + ' - ' + col[0].columnName
