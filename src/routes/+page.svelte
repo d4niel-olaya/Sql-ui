@@ -21,6 +21,7 @@
   )
   
 </script>
+<Logo/>
   <div class="flex flex-wrap justify-around mt-5 w-screen" bind:this={maincontainer}>
     <CodeResult/>
     <div class="flex flex-col items-center">
