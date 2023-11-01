@@ -37,7 +37,7 @@
             columnData.default.value = "";
         }else{
             columnData.default.custom = false;
-            if(selectDefault.value == "CURRENT_TIMESTAMP" || selectDefault.value == columnConstraints.NULL)
+            if(selectDefault.value == "CURRENT_TIMESTAMP()" || selectDefault.value == columnConstraints.NULL)
             {
                 columnData.default.value = selectDefault.value;
             }else{
@@ -118,7 +118,7 @@
             <option value="None" class="option">None</option>
             <option value="Custom" class="option">Custom</option>
             <option value="{columnConstraints.NULL}" class="option">{columnConstraints.NULL}</option>
-            <option value="CURRENT_TIMESTAMP" class="option">CURRENT_TIMESTAMP</option>
+            <option value="CURRENT_TIMESTAMP()" class="option">CURRENT_TIMESTAMP</option>
         </select>
         {#if columnData.default.custom}
             <!-- svelte-ignore a11y-label-has-associated-control -->
