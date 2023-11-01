@@ -9,6 +9,7 @@
     import { mainContainer } from "../services/board";
     import { details, detailsManager } from "../services/tableDetails";
     import { columnConstraints } from "../interfaces/enumsql";
+    import TableSqlDetails from "./TableSqlDetails.svelte";
     export let model : ITable
     export let canvas : HTMLCanvasElement
     let tableStorage : ITable
@@ -142,8 +143,12 @@
 
     function generateRow(row : IColumnUI)
     {
-      let pk = row.constraint.includes(columnConstraints.PRIMARY_KEY) ? "PK|" : ""
-      return `${pk}${row.columnName}|${row.constraint}` 
+      let pk = ""
+      let defaultvalue = row.default.value.trim().length  != 0 ? `DEFAULT ${row.default.value}` : "";
+    
+        pk = `<pre data-prefix=">"><code>  ${row.columnName} ${row.type}${row.length != "" ? "("+row.length+")" : ""} ${defaultvalue}</code></pre>`
+            
+      return pk 
     }
 
 
@@ -166,23 +171,28 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore redundant-event-modifier -->
-<div class="absolute cursor-grab card w-72 bg-base-100 shadow-xl font-mono  border-2 border-slate-400"
+<div class="absolute cursor-grab w-72 max-w-sm bg-base-100 shadow-xl font-mono rounded-md"
 bind:this={div}
 on:mousedown|stopPropagation={d}
 >
   {#if $details}
-    <div class="overflow-x-auto">
-      <div>
-        {#each cols as c}
-        <div class="text-center card">
-            <div class="p-2">{generateRow(c)}</div>
-        </div> 
-        {/each}
-      </div>
-    </div>
+    
+    <div class="overflow-x-auto"> 
+      <div class="grid grid-cols-2 gap-4"> 
+        <div class="text-center col-span-2 border-b border-slate-700 p-2">
+          <p class="font-medium text-lg text-slate-200">{model.tableName}</p>
+          </div>  
+          {#each cols as c}  
+                  <div class="p-2 text-slate-300">{c.columnName}</div>
+                  <div class="p-2 text-slate-300">{c.type}</div>
+          {/each}
+        </div>
+  </div>
     {:else}
     <div class="card-body">
-      <h2 class="card-title">{model.tableName}</h2>
+      <div>
+        <h1 class="text-center text-lg">{model.tableName}</h1>
+      </div>
     </div>
   {/if}
 

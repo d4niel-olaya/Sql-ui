@@ -18,4 +18,4 @@ export class detailsManager
         return false
     }
 }
-export const details = writable(detailsManager.getVal())
+export const details = writable(false)
