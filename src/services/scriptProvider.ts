@@ -85,10 +85,10 @@ export class scriptProvider{
             if(table.colums[i].default.value.trim().length  != 0)
             {
                 defaultvalue = `DEFAULT ${table.colums[i].default.value}`
-            }
-            else if(table.colums[i].default.value == columnConstraints.NULL)
-            {
-               defaultvalue = `${table.colums[i].default.value}`
+                if(table.colums[i].default.value == columnConstraints.NULL)
+                {
+                    defaultvalue = `<span class="text-violet-500">${table.colums[i].default.value}</span>`
+                }
             }
 
             if(table.colums[i].constraint == columnConstraints.FOREIGN_KEY)
