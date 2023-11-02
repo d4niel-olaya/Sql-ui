@@ -170,29 +170,59 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore redundant-event-modifier -->
-<div class="absolute cursor-grab w-72 max-w-sm bg-base-100 shadow-xl font-mono rounded-md"
+<div class="absolute cursor-grab w-72 max-w-sm bg-base-100 shadow-xl font-mono bg-neutral"
 bind:this={div}
 on:mousedown|stopPropagation={d}
 >
   {#if $details}
     
     <div class="overflow-x-auto"> 
-      <div class="grid grid-cols-2 gap-4"> 
-        <div class="text-center col-span-2 border-b border-slate-700 p-2">
-          <p class="font-medium text-lg text-slate-200">{model.tableName}</p>
-          </div>  
-          {#if cols.length != 0}
-            {#each cols as c}  
-                    <div class="p-2 text-slate-300">{c.columnName}</div>
-                    <div class="p-2 text-slate-300">{c.type}</div>
-            {/each}
-          {/if}
-        </div>
+      <div class="text-center p-2 flex items-center justify-around">
+        <p class="font-medium text-lg text-slate-200">{model.tableName}</p>
+        <button class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+          </svg>
+        </button>
+        </div>  
+          
+          <table class="table">
+            <!-- head -->
+            <thead>
+              <tr>
+                
+                <th></th>
+                <th>Column Name</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#if cols.length != 0}
+                {#each cols as c, index} 
+                <tr>
+                  <td >{index}</td>
+                  <td >{c.columnName}</td>
+                  <td >{c.type}</td>
+                </tr> 
+                {/each}
+              {/if}
+            </tbody>
+          </table>
+        
   </div>
     {:else}
     <div class="card-body">
       <div>
         <h1 class="text-center text-lg">{model.tableName}</h1>
+      </div>
+      <div class="card-actions justify-center">
+        <button class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+          </svg>
+        </button>
       </div>
     </div>
   {/if}
