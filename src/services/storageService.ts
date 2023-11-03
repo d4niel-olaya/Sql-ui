@@ -118,4 +118,19 @@ export class storageService
         }
     }
 
+
+    deleteTable(table : ITable)
+    {
+        let tables = this.get()
+        let newTables = tables.filter((t) => t.id != table.id)
+        let tablesPRandPK = this.getTablesWithPRandFK();
+        let newTablesPRAndPk = tablesPRandPK.filter((t) => t.tableIdPK != table.id)
+        let newTablesPRAndPk2 = tablesPRandPK.filter((t) => t.tablerIdFk != table.id)
+        let tablesWithPr = this.getTablesWithPR()
+        let newTablesPR = tablesWithPr.filter((t) => t.tableId != table.id)
+        localStorage.setItem("tables", JSON.stringify(newTables));
+        localStorage.setItem("tables-with-pr-and-fk", JSON.stringify(newTablesPRAndPk));
+        localStorage.setItem("tables-with-pr-and-fk", JSON.stringify(newTablesPRAndPk2));
+        localStorage.setItem("tables-with-pr", JSON.stringify(newTablesPR));
+    }
 }

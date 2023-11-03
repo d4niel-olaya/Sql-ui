@@ -4,8 +4,8 @@
     import type { IColumnUI, ITable } from "../interfaces/base";
     import { storageService } from "../services/storageService";
     import { boardLeft,boardTop } from "../services/board";
-    import { afterUpdate, beforeUpdate, onMount } from "svelte";
-    import { listTables, listTablesWithRelation } from "../services/list";
+    import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
+    import { listTables, listTablesWithPr, listTablesWithRelation } from "../services/list";
     import { mainContainer } from "../services/board";
     import { details, detailsManager } from "../services/tableDetails";
     import { columnConstraints } from "../interfaces/enumsql";
@@ -163,7 +163,21 @@
       listTables.set(service.get());
     });
 
-  
+    function deleteTableModal()
+    {
+      modal.show()
+    }
+
+    function deletaTableAction()
+    {
+      service.deleteTable(model)
+      let ctx = canvas.getContext("2d");
+      ctx?.clearRect(0, 0, canvas.width, canvas.height);
+      listTables.set(service.get())
+      listTablesWithRelation.set(service.getTablesWithPRandFK())
+      listTablesWithPr.set(service.getTablesWithPR());
+      modal.close()
+    }
 
 </script>
 
@@ -179,7 +193,7 @@ on:mousedown|stopPropagation={d}
     <div class="overflow-x-auto"> 
       <div class="text-center p-2 flex items-center justify-around">
         <p class="font-medium text-lg text-slate-200">{model.tableName}</p>
-        <button class="btn btn-ghost">
+        <button class="btn btn-ghost" on:click={deleteTableModal}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
@@ -216,8 +230,8 @@ on:mousedown|stopPropagation={d}
       <div>
         <h1 class="text-center text-lg">{model.tableName}</h1>
       </div>
-      <div class="card-actions justify-center">
-        <button class="btn btn-ghost">
+      <div class="card-actions justify-end">
+        <button class="btn btn-ghost" on:click={deleteTableModal}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
@@ -231,10 +245,11 @@ on:mousedown|stopPropagation={d}
 
 <dialog id="my_modal_1" class="modal" bind:this={modal}>
   <div class="modal-box">
-    <h3 class="font-bold text-lg">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
+    <h3 class="font-bold text-lg">Delete</h3>
+    <p class="py-4">Are you sure to delete this table?</p>
     <div class="modal-action">
       <form method="dialog">
+        <button class="btn btn-active btn-primary" on:click|preventDefault={deletaTableAction}>Delete</button>
         <button class="btn">Close</button>
       </form>
     </div>
