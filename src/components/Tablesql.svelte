@@ -3,8 +3,8 @@
 <script lang="ts">
     import type { IColumnUI, ITable } from "../interfaces/base";
     import { storageService } from "../services/storageService";
-    import { boardLeft,boardTop } from "../services/board";
-    import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
+    import { boardLeft,boardTop , toogleContainer} from "../services/board";
+    import {  onMount } from "svelte";
     import { listTables, listTablesWithPr, listTablesWithRelation } from "../services/list";
     import { mainContainer } from "../services/board";
     import { details, detailsManager } from "../services/tableDetails";
@@ -64,7 +64,7 @@
 
     function m(event:MouseEvent)
     {
-      if (isDragging && (event.clientY - y) > 305 && (event.clientX-x) < ($boardLeft-model.w) && event.clientX > 100) {
+      if (isDragging && (event.clientY - y) > $toogleContainer && (event.clientX-x) < ($boardLeft-model.w) && event.clientX > 100) {
         event.preventDefault()
         let ctx = canvas.getContext("2d");
         ctx?.reset(); // reset canvas
